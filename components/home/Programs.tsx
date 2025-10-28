@@ -11,7 +11,7 @@ import { ROUTES } from "@/routes"
 import { programContent } from "@/data/programs"
 import SectionHeader from "../shared/SectionHeader"
 
-const Programs = () => {
+const ProgramsSection = () => {
   const sectionRef = useRef<HTMLDivElement>(null)
   const { language, isRTL } = useLanguage()
   const content = programContent[language]
@@ -142,4 +142,4 @@ const Programs = () => {
   )
 }
 
-export default Programs
+export default ProgramsSection

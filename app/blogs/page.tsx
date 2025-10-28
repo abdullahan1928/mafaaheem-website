@@ -99,7 +99,7 @@ interface BlogPost {
   url?: string | null;
 }
 
-export default function BlogsPageClient() {
+export default function BlogsPage() {
   const [blogs, setBlogs] = useState<BlogPost[] | null>(null);
   const [loading, setLoading] = useState(true);
   const [err, setErr] = useState<string | null>(null);

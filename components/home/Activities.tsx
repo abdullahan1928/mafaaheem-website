@@ -77,7 +77,7 @@ const ClassRecordings = ({ content }: { content: typeof activitesContent[Languag
   )
 }
 
-const Activities = () => {
+const ActivitiesSection = () => {
   const sectionRef = useRef<HTMLDivElement>(null)
   const { language, isRTL } = useLanguage()
   const activities = getActivities(language)
@@ -160,4 +160,4 @@ const Activities = () => {
   )
 }
 
-export default Activities
+export default ActivitiesSection

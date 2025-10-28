@@ -6,7 +6,7 @@ import Image from "next/image"
 import { getObjectives, getValues, valuesContent } from "@/data/values"
 import SectionHeader from "../shared/SectionHeader"
 
-const Values = () => {
+const ValuesSection = () => {
   const sectionRef = useRef<HTMLDivElement>(null)
   const { language, isRTL } = useLanguage()
   const content = valuesContent[language]
@@ -124,4 +124,4 @@ const Values = () => {
   )
 }
 
-export default Values
+export default ValuesSection

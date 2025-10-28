@@ -7,7 +7,7 @@ import Image from "next/image"
 import { aboutContent } from "@/data/about"
 import SectionHeader from "../shared/SectionHeader"
 
-const About = () => {
+const AboutSection = () => {
   const sectionRef = useRef<HTMLDivElement>(null)
   const { language, isRTL } = useLanguage()
   const content = aboutContent[language]
@@ -109,4 +109,4 @@ const About = () => {
   )
 }
 
-export default About
+export default AboutSection

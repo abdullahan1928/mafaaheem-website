@@ -9,7 +9,7 @@ import { useRouter } from "next/navigation"
 import { ROUTES } from "@/routes"
 import { ctaContent } from "@/data/cta"
 
-const CallToAction = () => {
+const CTASection = () => {
   const sectionRef = useRef<HTMLDivElement>(null)
   const { openContactModal } = useContactModal()
   const router = useRouter()
@@ -89,4 +89,4 @@ const CallToAction = () => {
   )
 }
 
-export default CallToAction
+export default CTASection

@@ -8,7 +8,7 @@ import { ROUTES } from "@/routes"
 import { useRouter } from "next/navigation"
 import { heroContent } from "@/data/hero"
 
-const Hero = () => {
+const HeroSection = () => {
   const router = useRouter()
   const { isRTL, language } = useLanguage()
   const content = heroContent[language]
@@ -102,4 +102,4 @@ const Hero = () => {
   )
 }
 
-export default Hero
+export default HeroSection
