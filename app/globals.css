@@ -1,0 +1,189 @@
+@import url('https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Scheherazade+New:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@400;700&display=swap');
+@import url('https://cdn.jsdelivr.net/gh/urduweb/font-jameel-noori-nastaleeq/font.css');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 35 60% 98%;
+    --foreground: 20 15% 15%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 20 15% 15%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 20 15% 15%;
+
+    --primary: 26 85% 63%;
+    --primary-foreground: 35 60% 98%;
+
+    --secondary: 163 30% 41%;
+    --secondary-foreground: 35 60% 98%;
+
+    --muted: 35 25% 90%;
+    --muted-foreground: 20 15% 45%;
+
+    --accent: 10 54% 31%;
+    --accent-foreground: 35 60% 98%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 35 60% 98%;
+
+    --border: 35 25% 85%;
+    --input: 35 25% 85%;
+    --ring: 26 85% 63%;
+
+    --radius: 0.75rem;
+
+    --sidebar-background: 35 60% 98%;
+    --sidebar-foreground: 20 15% 15%;
+    --sidebar-primary: 26 85% 63%;
+    --sidebar-primary-foreground: 35 60% 98%;
+    --sidebar-accent: 35 25% 90%;
+    --sidebar-accent-foreground: 20 15% 15%;
+    --sidebar-border: 35 25% 85%;
+    --sidebar-ring: 26 85% 63%;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans;
+  }
+
+  .page-transition-wrapper {
+    @apply animate-page-transition-in;
+  }
+
+  .glassmorphism {
+    @apply bg-white/70 backdrop-blur-md border border-white/50 shadow-md;
+  }
+
+  .scroll-reveal {
+    @apply opacity-0 translate-y-8 transition-all duration-700 ease-out;
+  }
+
+  .scroll-reveal.revealed {
+    @apply opacity-100 translate-y-0;
+  }
+
+  .stagger-1 {
+    transition-delay: 100ms;
+  }
+
+  .stagger-2 {
+    transition-delay: 200ms;
+  }
+
+  .stagger-3 {
+    transition-delay: 300ms;
+  }
+
+  .stagger-4 {
+    transition-delay: 400ms;
+  }
+
+  .stagger-5 {
+    transition-delay: 500ms;
+  }
+}
+
+@layer components {
+  .section-heading {
+    @apply text-2xl sm:text-3xl md:text-4xl font-bold text-mafaaheem-brown mb-8 sm:mb-10 md:mb-12 tracking-wide inline-flex items-center justify-center gap-6 md:gap-2 md:flex-row flex-col;
+  }
+
+  .section-subheading {
+    @apply text-xl md:text-2xl font-semibold text-mafaaheem-green mb-4;
+  }
+
+  .card-hover {
+    @apply transition-all duration-300 hover:shadow-lg hover:-translate-y-1;
+  }
+
+  .button-animated {
+    @apply relative overflow-hidden transition-all duration-300 after:absolute after:inset-0 after:bg-white/10 after:scale-x-0 after:origin-left after:transition-transform after:duration-300 hover:after:scale-x-100;
+  }
+
+  .nav-link {
+    @apply px-3 py-2 text-foreground relative after:absolute after:w-0 after:h-0.5 after:bg-mafaaheem-gold after:bottom-0 after:left-1/2 after:-translate-x-1/2 after:transition-all after:duration-300 hover:after:w-full;
+  }
+
+  .nav-link.active {
+    @apply after:w-full text-mafaaheem-brown font-medium;
+  }
+}
+
+.arabic {
+  font-family: 'Amiri', serif !important;
+}
+
+/* .arabic {
+  font-family: 'Scheherazade New', serif;
+} */
+
+/* .arabic {
+  font-family: 'Noto Naskh Arabic', serif;
+} */
+
+.urdu {
+  font-family: 'Jameel Noori Nastaleeq', serif !important;
+  font-size: 1.2rem;
+}
+
+.decoration {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.2rem;
+}
+
+.decoration::before {
+  content: '';
+  width: 10px;
+  height: 10px;
+  transform: rotate(45deg);
+  background: linear-gradient(135deg, #D4AF37, #F6E27F);
+  box-shadow: 0 0 10px rgba(212, 175, 55, 0.4);
+  border-radius: 2px;
+}
+
+.decoration::after {
+  content: '';
+  width: 40px;
+  height: 2px;
+  background: linear-gradient(to right, #D4AF37, transparent);
+  opacity: 0.8;
+  border-radius: 2px;
+  transform: rotate(90deg);
+}
+
+@media (min-width: 640px) {
+  .decoration {
+    flex-direction: row;
+    gap: 0;
+  }
+
+  .decoration::before {
+    width: 12px;
+    height: 12px;
+  }
+
+  .decoration::after {
+    width: 50px;
+    transform: rotate(0deg);
+    /* line horizontal again */
+  }
+}

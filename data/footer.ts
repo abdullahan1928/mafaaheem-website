@@ -1,0 +1,47 @@
+export const footerContent = {
+    en: {
+        aboutHeading: "Mafaaheem Institute",
+        aboutText:
+            "An educational initiative dedicated to nurturing faithful, intellectually conscious youth capable of carrying Islam's message with profound understanding.",
+        quickLinks: "Quick Links",
+        programs: "Our Programs",
+        contact: "Contact Us",
+        home: "Home",
+        courses: "Courses",
+        team: "Our Team",
+        about: "About Us",
+        youthTraining: "Youth Islamic Training",
+        studyCircles: "Study Circles",
+        rights: "All Rights Reserved.",
+    },
+    ur: {
+        aboutHeading: "مفاہیم انسٹیٹیوٹ",
+        aboutText:
+            "ایک تعلیمی ادارہ جو وفادار اور فکری طور پر باشعور نوجوانوں کی تربیت کے لیے وقف ہے تاکہ وہ اسلام کے پیغام کو گہری سمجھ کے ساتھ آگے بڑھا سکیں۔",
+        quickLinks: "اہم روابط",
+        programs: "ہمارے پروگرامز",
+        contact: "رابطہ کریں",
+        home: "ہوم",
+        courses: "کورسز",
+        team: "ہماری ٹیم",
+        about: "ہمارے بارے میں",
+        youthTraining: "اسلامی تربیت برائے نوجوانان",
+        studyCircles: "مطالعہ کے حلقے",
+        rights: "تمام حقوق محفوظ ہیں۔",
+    },
+    ar: {
+        aboutHeading: "معهد مفاهيم",
+        aboutText:
+            "مبادرة تعليمية تهدف إلى تنشئة الشباب المؤمن الواعي فكرياً، القادر على حمل رسالة الإسلام بفهم عميق.",
+        quickLinks: "روابط سريعة",
+        programs: "برامجنا",
+        contact: "تواصل معنا",
+        home: "الرئيسية",
+        courses: "الدورات",
+        team: "فريقنا",
+        about: "من نحن",
+        youthTraining: "تدريب الشباب الإسلامي",
+        studyCircles: "حلقات الدراسة",
+        rights: "جميع الحقوق محفوظة.",
+    },
+}
