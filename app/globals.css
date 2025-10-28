@@ -139,8 +139,38 @@
 } */
 
 .urdu {
-  font-family: 'Jameel Noori Nastaleeq', serif !important;
   font-size: 1.2rem;
+  font-family: 'Jameel Noori Nastaleeq', serif !important;
+}
+
+.urdu button {
+  word-spacing: 0.15rem;
+}
+
+.urdu h1,
+.urdu h2,
+.urdu h3,
+.urdu h4,
+.urdu h5,
+.urdu h6 {
+  font-weight: 700;
+  line-height: 1.5;
+  direction: rtl;
+}
+
+.urdu .text-xs {
+  font-size: 0.9rem !important;
+  line-height: 1.7rem !important;
+}
+
+.urdu .text-sm {
+  font-size: 1.1rem !important;
+  line-height: 1.9rem !important;
+}
+
+.urdu .text-base {
+  font-size: 1.3rem !important;
+  line-height: 2.1rem !important;
 }
 
 .decoration {

@@ -4,9 +4,10 @@ import { useLanguage, type Language } from "@/contexts/LanguageContext"
 import { Button } from "@/components/ui/button"
 import { Globe, X } from "lucide-react"
 import { useEffect, useRef, useState } from "react"
+import { createPortal } from "react-dom"
 
 export function LanguageSwitcher() {
-  const { language, setLanguage } = useLanguage()
+  const { language, setLanguage, isRTL } = useLanguage()
   const [isOpen, setIsOpen] = useState(false)
   const [isMobile, setIsMobile] = useState(false)
   const popupRef = useRef<HTMLDivElement>(null)
@@ -27,16 +28,17 @@ export function LanguageSwitcher() {
 
   // Close popup on outside click (desktop dropdown)
   useEffect(() => {
-    if (!isMobile && isOpen) {
+    if (isMobile && isOpen) {
       const handleClickOutside = (e: MouseEvent) => {
-        if (popupRef.current && !popupRef.current.contains(e.target as Node)) {
-          setIsOpen(false)
+        const modal = document.getElementById("language-modal");
+        if (modal && !modal.contains(e.target as Node)) {
+          setIsOpen(false);
         }
-      }
-      document.addEventListener("mousedown", handleClickOutside)
-      return () => document.removeEventListener("mousedown", handleClickOutside)
+      };
+      document.addEventListener("mousedown", handleClickOutside);
+      return () => document.removeEventListener("mousedown", handleClickOutside);
     }
-  }, [isOpen, isMobile])
+  }, [isOpen, isMobile]);
 
   return (
     <div className="relative">
@@ -54,7 +56,7 @@ export function LanguageSwitcher() {
       {!isMobile && isOpen && (
         <div
           ref={popupRef}
-          className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg border border-mafaaheem-gold/20 z-50 animate-in fade-in slide-in-from-top-2 duration-200"
+          className={`absolute mt-2 w-48 bg-white rounded-lg shadow-lg border border-mafaaheem-gold/20 z-50 animate-in fade-in slide-in-from-top-2 duration-200 ${isRTL ? "left-0" : "right-0"}`}
         >
           <div className="p-2 space-y-2">
             {languages.map((lang) => (
@@ -65,8 +67,8 @@ export function LanguageSwitcher() {
                   setIsOpen(false)
                 }}
                 className={`w-full text-left px-4 py-2 rounded-md transition-colors duration-200 ${language === lang.code
-                    ? "bg-mafaaheem-gold/20 text-mafaaheem-brown font-semibold"
-                    : "text-foreground hover:bg-mafaaheem-gold/10"
+                  ? "bg-mafaaheem-gold/20 text-mafaaheem-brown font-semibold"
+                  : "text-foreground hover:bg-mafaaheem-gold/10"
                   }`}
               >
                 <div className="font-medium">{lang.name}</div>
@@ -78,9 +80,12 @@ export function LanguageSwitcher() {
       )}
 
       {/* Mobile Popup */}
-      {isMobile && isOpen && (
+      {isMobile && isOpen && createPortal(
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm animate-in fade-in duration-200">
-          <div className="bg-white dark:bg-neutral-900 w-[90%] max-w-sm rounded-2xl p-6 shadow-lg border border-mafaaheem-gold/20 animate-in zoom-in-75 duration-300 relative">
+          <div
+            id="language-modal"
+            className="bg-white dark:bg-neutral-900 w-[90%] max-w-sm rounded-2xl p-6 shadow-lg border border-mafaaheem-gold/20 animate-in zoom-in-75 duration-300 relative"
+          >
             <button
               onClick={() => setIsOpen(false)}
               className="absolute right-4 top-4 text-gray-600 hover:text-mafaaheem-gold transition-colors"
@@ -99,8 +104,8 @@ export function LanguageSwitcher() {
                     setIsOpen(false)
                   }}
                   className={`w-full py-3 rounded-xl text-center text-base font-medium transition-all duration-200 ${language === lang.code
-                      ? "bg-mafaaheem-gold/90 text-white"
-                      : "bg-mafaaheem-gold/10 hover:bg-mafaaheem-gold/20 text-mafaaheem-brown"
+                    ? "bg-mafaaheem-gold/90 text-white"
+                    : "bg-mafaaheem-gold/10 hover:bg-mafaaheem-gold/20 text-mafaaheem-brown"
                     }`}
                 >
                   <div>{lang.name}</div>
@@ -109,7 +114,8 @@ export function LanguageSwitcher() {
               ))}
             </div>
           </div>
-        </div>
+        </div>,
+        document.body
       )}
     </div>
   )

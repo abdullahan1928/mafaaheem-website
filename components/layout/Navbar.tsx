@@ -11,13 +11,15 @@ import Image from "next/image"
 import { usePathname } from "next/navigation"
 import { ROUTES } from "@/routes"
 import { cn } from "@/lib/utils"
+import { contactContent, navLinks } from "@/data/navbar"
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const pathname = usePathname()
   const { openContactModal } = useContactModal()
-  const { t } = useLanguage()
+  const { language } = useLanguage()
+  const content = contactContent[language]
 
   const isActive = (path: string) => {
     if (path === ROUTES.HOME) return pathname === path
@@ -33,12 +35,6 @@ const Navbar = () => {
   useEffect(() => {
     if (isMobileMenuOpen) setTimeout(() => setIsMobileMenuOpen(false), 0)
   }, [pathname])
-
-  const navLinks = [
-    { name: t("nav.home", { en: "Home", ur: "ہوم", ar: "الرئيسية" }), path: ROUTES.HOME },
-    { name: t("nav.courses", { en: "Courses", ur: "کورسز", ar: "الدورات" }), path: ROUTES.COURSES },
-    { name: t("nav.team", { en: "Team", ur: "ٹیم", ar: "الفريق" }), path: ROUTES.TEAM },
-  ]
 
   return (
     <header
@@ -70,7 +66,7 @@ const Navbar = () => {
                   : "text-foreground hover:text-mafaaheem-brown"
                   }`}
               >
-                {link.name}
+                {link.name[language]}
                 {isActive(link.path) && (
                   <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-mafaaheem-gold to-mafaaheem-green rounded-full" />
                 )}
@@ -83,7 +79,7 @@ const Navbar = () => {
                 onClick={openContactModal}
                 className="text-xs sm:text-sm transition-all duration-300 hover:shadow-lg"
               >
-                {t("nav.contact", { en: "Contact Us", ur: "رابطہ کریں", ar: "اتصل بنا" })}
+                {content}
               </Button>
             </div>
           </nav>
@@ -120,11 +116,11 @@ const Navbar = () => {
                   }`}
                 style={{ animationDelay: `${index * 70}ms` }}
               >
-                {link.name}
+                {link.name[language]}
               </Link>
             ))}
             <Button className="mt-3 w-full" onClick={openContactModal}>
-              {t("nav.contact", { en: "Contact Us", ur: "ہمسے رابطہ کریں", ar: "اتصل بنا" })}
+              {content}
             </Button>
           </div>
         </nav>

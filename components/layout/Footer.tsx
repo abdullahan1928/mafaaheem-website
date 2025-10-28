@@ -28,7 +28,7 @@ const Footer = () => {
               {content.aboutHeading}
             </h3>
             <p className="text-white/80 mb-6 text-sm sm:text-base leading-relaxed">{content.aboutText}</p>
-            <div className={`flex ${isRTL ? "space-x-reverse" : ""} space-x-3 sm:space-x-4`}>
+            <div className={`flex gap-3`}>
               {socialLinks.map((social) => {
                 const Icon = social.icon
                 return (
@@ -180,9 +180,9 @@ const Footer = () => {
         </div>
 
         <div className="border-t border-white/10 pt-6 sm:pt-8 text-center text-xs sm:text-sm">
-          <p className="text-white/70">
+          <span className="text-white/70">
             © {currentYear} Mafaaheem Institute. {content.rights}
-          </p>
+          </span>
         </div>
       </div>
     </footer>

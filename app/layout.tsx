@@ -12,9 +12,9 @@ export async function generateMetadata(): Promise<Metadata> {
   const lang = ((await cookieStore).get("language")?.value || "en") as Language;
 
   const siteNames = {
-    en: "Mafaaheem",
-    ur: "مفاہیم",
-    ar: "مفاهيم",
+    en: "Mafaaheem Institute",
+    ur: "مفاہیم انسٹیٹوٹ",
+    ar: "مؤسسة مفاهيم",
   };
 
   const templateNames = {
@@ -29,7 +29,7 @@ export async function generateMetadata(): Promise<Metadata> {
 
   return {
     title: {
-      default: `${siteName} Institute`,
+      default: `${siteName}`,
       template: `%s ${templateName}`,
     },
     description:

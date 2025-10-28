@@ -35,7 +35,7 @@ const About = () => {
       id="about"
       ref={sectionRef}
       dir={isRTL ? "rtl" : "ltr"}
-      className="py-16 sm:py-20 md:py-24 bg-gradient-to-b from-white to-mafaaheem-beige/10"
+      className="py-16 sm:py-20 md:py-24 bg-gradient-to-b from-white to-mafaaheem-beige/10 sm:px-10"
     >
       <div className="container mx-auto px-4 md:px-6">
         <div className="text-center mb-12 sm:mb-16">
@@ -96,8 +96,8 @@ const About = () => {
                 height={500}
                 className="relative rounded-2xl shadow-2xl object-cover w-full h-80 sm:h-96 md:h-[500px]"
               />
-              <div className="absolute -bottom-6 sm:-bottom-8 right-0 sm:-right-8 bg-white p-4 sm:p-6 rounded-xl shadow-xl max-w-full sm:max-w-lg border border-mafaaheem-gold/20 scroll-reveal stagger-3">
-                <p className="text-mafaaheem-brown font-medium text-sm sm:text-lg">
+              <div className="absolute -bottom-6 sm:-bottom-8 right-0 sm:-right-8 bg-white p-4 sm:p-6 rounded-xl shadow-xl max-w-[90%] sm:max-w-lg border border-mafaaheem-gold/20 scroll-reveal stagger-3">
+                <p className="text-mafaaheem-brown font-medium text-sm sm:text-base">
                   {`"${content.pictureSubtitle}"`}
                 </p>
               </div>

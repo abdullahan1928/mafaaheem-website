@@ -91,9 +91,9 @@ const Values = () => {
                   >
                     <span className="h-2.5 w-2.5 sm:h-3 sm:w-3 rounded-full bg-mafaaheem-gold flex-shrink-0 mt-2 group-hover:scale-125 transition-transform"></span>
                     <div>
-                      <span className="font-bold text-mafaaheem-brown text-sm sm:text-base">
+                      <h4 className="font-bold text-mafaaheem-brown text-sm sm:text-base">
                         {objective.title}
-                      </span>
+                      </h4>
                       <p className="text-gray-700 mt-1 text-sm sm:text-base leading-relaxed">
                         {objective.description}
                       </p>
