@@ -42,7 +42,7 @@ const NotFound = () => {
         </p>
 
         <Link
-          href={ROUTES.HOME}
+          href={ROUTES.PUBLIC.HOME}
           className="inline-flex items-center justify-center gap-2 px-6 py-3 text-base md:text-lg font-semibold rounded-xl bg-mafaaheem-gold text-white shadow-md hover:bg-mafaaheem-brown hover:shadow-lg transition-all duration-300"
         >
           <ArrowLeftCircle className={`h-5 w-5 ${isRTL && "rotate-180"}`} />

@@ -1,4 +1,4 @@
-import mongoose, { Document, Schema, model } from "mongoose";
+import { Document, Schema, model, models } from "mongoose";
 import bcrypt from "bcryptjs";
 
 export interface IAdmin extends Document {
@@ -18,4 +18,4 @@ AdminSchema.pre("save", async function (next) {
   next();
 });
 
-export default mongoose.models.Admin || model<IAdmin>("Admin", AdminSchema);
+export default models.Admin || model<IAdmin>("Admin", AdminSchema);
