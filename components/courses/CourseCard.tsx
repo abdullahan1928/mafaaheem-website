@@ -101,7 +101,7 @@ const CourseCard = ({
 
         {/* Button */}
         <div className="flex justify-end mt-auto">
-          <Link href={ROUTES.COURSE(id)}>
+          <Link href={ROUTES.PUBLIC.COURSES.VIEW(id)}>
             <Button size="sm" className="group/btn">
               {content.viewDetails}
 

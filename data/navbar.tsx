@@ -3,23 +3,23 @@ import { ROUTES } from "@/routes";
 export const navLinks = [
     {
         name: { en: "Home", ur: "ہوم", ar: "الرئيسية" },
-        path: ROUTES.HOME
+        path: ROUTES.PUBLIC.HOME
     },
     {
         name: { en: "Courses", ur: "کورسز", ar: "الدورات" },
-        path: ROUTES.COURSES
+        path: ROUTES.PUBLIC.COURSES.LIST
     },
     {
         name: { en: "Events", ur: "ایونٹس", ar: "الفعاليات" },
-        path: ROUTES.EVENTS
+        path: ROUTES.PUBLIC.EVENTS.LIST
     },
     {
         name: { en: "Blogs", ur: "بلاگز", ar: "المدونات" },
-        path: ROUTES.BLOGS
+        path: ROUTES.PUBLIC.BLOGS.LIST
     },
     {
         name: { en: "About Us", ur: "ہمارے بارے میں", ar: "من نحن" },
-        path: ROUTES.TEAM
+        path: ROUTES.PUBLIC.TEAM
     },
 ]
 

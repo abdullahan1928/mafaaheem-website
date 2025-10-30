@@ -114,7 +114,7 @@ const ProgramsSection = () => {
                   </ul>
                 </div>
 
-                <Link href={ROUTES.COURSE(program.id)} className="block">
+                <Link href={ROUTES.PUBLIC.COURSES.VIEW(program.id)} className="block">
                   <Button className="w-full text-white font-semibold py-5 sm:py-6 rounded-lg flex items-center justify-center gap-2 transition-all text-sm sm:text-base">
                     {content.viewText}
                     {isRTL ? <ArrowLeft className="h-4 w-4" /> : <ArrowRight className="h-4 w-4" />}
@@ -126,7 +126,7 @@ const ProgramsSection = () => {
         </div>
 
         <div className="text-center mt-16">
-          <Link href={ROUTES.COURSES}>
+          <Link href={ROUTES.PUBLIC.COURSES.LIST}>
             <Button
               variant="outline"
               size="lg"

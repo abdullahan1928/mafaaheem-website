@@ -57,7 +57,7 @@ const Course = () => {
                         <p className="text-gray-600 mb-8 text-lg">
                             {content.notFoundDescription}
                         </p>
-                        <Button onClick={() => router.push(ROUTES.COURSES)} variant="outline">
+                        <Button onClick={() => router.push(ROUTES.PUBLIC.COURSES.LIST)} variant="outline">
                             {isRTL ?
                                 <ArrowRight className="mr-2 h-4 w-4" /> :
                                 <ArrowLeft className="mr-2 h-4 w-4" />
@@ -79,7 +79,7 @@ const Course = () => {
                         <Button
                             variant="ghost"
                             size="sm"
-                            onClick={() => router.push(ROUTES.COURSES)}
+                            onClick={() => router.push(ROUTES.PUBLIC.COURSES.LIST)}
                             className="hover:bg-primary/80"
                         >
                             {isRTL ?

@@ -77,7 +77,7 @@ const HeroSection = () => {
               <Button
                 size="lg"
                 variant="outline"
-                onClick={() => router.push(ROUTES.COURSES)}
+                onClick={() => router.push(ROUTES.PUBLIC.COURSES.LIST)}
                 className="border-2 border-mafaaheem-green text-mafaaheem-green hover:bg-mafaaheem-green/5 font-semibold px-6 sm:px-8 py-4 sm:py-6 text-base rounded-lg transition-all"
               >
                 {content.browse}

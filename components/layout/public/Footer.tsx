@@ -14,9 +14,8 @@ const Footer = () => {
 
   return (
     <footer
-      className={`bg-gradient-to-b from-mafaaheem-brown to-mafaaheem-brown/95 text-white pt-12 sm:pt-16 pb-6 sm:pb-8 ${
-        isRTL ? "text-right" : "text-left"
-      }`}
+      className={`bg-gradient-to-b from-mafaaheem-brown to-mafaaheem-brown/95 text-white pt-12 sm:pt-16 pb-6 sm:pb-8 ${isRTL ? "text-right" : "text-left"
+        }`}
       dir={isRTL ? "rtl" : "ltr"}
     >
       <div className="container mx-auto px-4 sm:px-6">
@@ -59,20 +58,19 @@ const Footer = () => {
                   <Link
                     href={
                       idx === 0
-                        ? ROUTES.HOME
+                        ? ROUTES.PUBLIC.HOME
                         : idx === 1
-                        ? ROUTES.COURSES
-                        : idx === 2
-                        ? ROUTES.TEAM
-                        : "#about"
+                          ? ROUTES.PUBLIC.COURSES.LIST
+                          : idx === 2
+                            ? ROUTES.PUBLIC.TEAM
+                            : "#about"
                     }
                     className="text-white/80 hover:text-mafaaheem-gold transition-colors duration-300 flex items-center gap-2 group"
                   >
                     <ArrowRight
                       size={14}
-                      className={`opacity-0 group-hover:opacity-100 transition-opacity ${
-                        isRTL ? "rotate-180" : ""
-                      }`}
+                      className={`opacity-0 group-hover:opacity-100 transition-opacity ${isRTL ? "rotate-180" : ""
+                        }`}
                     />
                     {name}
                   </Link>
@@ -90,14 +88,13 @@ const Footer = () => {
             <ul className="space-y-3 sm:space-y-4 text-sm sm:text-base">
               <li>
                 <Link
-                  href={ROUTES.COURSES}
+                  href={ROUTES.PUBLIC.COURSES.LIST}
                   className="text-white/80 hover:text-mafaaheem-gold transition-colors duration-300 flex items-center gap-2 group"
                 >
                   <ArrowRight
                     size={14}
-                    className={`opacity-0 group-hover:opacity-100 transition-opacity ${
-                      isRTL ? "rotate-180" : ""
-                    }`}
+                    className={`opacity-0 group-hover:opacity-100 transition-opacity ${isRTL ? "rotate-180" : ""
+                      }`}
                   />
                   {content.youthTraining}
                 </Link>
@@ -109,9 +106,8 @@ const Footer = () => {
                 >
                   <ArrowRight
                     size={14}
-                    className={`opacity-0 group-hover:opacity-100 transition-opacity ${
-                      isRTL ? "rotate-180" : ""
-                    }`}
+                    className={`opacity-0 group-hover:opacity-100 transition-opacity ${isRTL ? "rotate-180" : ""
+                      }`}
                   />
                   <span className="arabic text-sm sm:text-base">البناء المنهجي</span>
                 </a>
@@ -123,9 +119,8 @@ const Footer = () => {
                 >
                   <ArrowRight
                     size={14}
-                    className={`opacity-0 group-hover:opacity-100 transition-opacity ${
-                      isRTL ? "rotate-180" : ""
-                    }`}
+                    className={`opacity-0 group-hover:opacity-100 transition-opacity ${isRTL ? "rotate-180" : ""
+                      }`}
                   />
                   {content.studyCircles}
                 </a>

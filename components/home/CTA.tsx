@@ -68,7 +68,7 @@ const CTASection = () => {
             <Button
               size="lg"
               className="w-full sm:!w-auto bg-white text-mafaaheem-brown hover:bg-mafaaheem-gold hover:text-white font-semibold px-6 sm:px-8 py-4 sm:py-6 text-sm sm:text-base rounded-lg transition-all hover:shadow-lg flex items-center justify-center gap-2"
-              onClick={() => router.push(ROUTES.COURSES)}
+              onClick={() => router.push(ROUTES.PUBLIC.COURSES.LIST)}
             >
               {content.explore}
               <ArrowRight className={`h-4 w-4 ${isRTL ? "rotate-180" : ""}`} />

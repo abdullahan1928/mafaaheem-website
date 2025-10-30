@@ -6,7 +6,7 @@ import { Menu, X } from "lucide-react"
 import { useContactModal } from "@/contexts/ContactModalContext"
 import { useLanguage } from "@/contexts/LanguageContext"
 import Link from "next/link"
-import { LanguageSwitcher } from "../shared/LanguageSwitcher"
+import { LanguageSwitcher } from "../../shared/LanguageSwitcher"
 import Image from "next/image"
 import { usePathname } from "next/navigation"
 import { ROUTES } from "@/routes"
@@ -22,7 +22,7 @@ const Navbar = () => {
   const content = contactContent[language]
 
   const isActive = (path: string) => {
-    if (path === ROUTES.HOME) return pathname === path
+    if (path === ROUTES.PUBLIC.HOME) return pathname === path
     return pathname.startsWith(path)
   }
 
@@ -45,7 +45,7 @@ const Navbar = () => {
     >
       <div className="container mx-auto px-3 sm:px-4 md:px-6">
         <div className="flex items-center justify-between">
-          <Link href={ROUTES.HOME} className="flex items-center gap-2 group">
+          <Link href={ROUTES.PUBLIC.HOME} className="flex items-center gap-2 group">
             <Image
               src="/images/logo/mafaaheem.png"
               alt="Mafaaheem Logo"
