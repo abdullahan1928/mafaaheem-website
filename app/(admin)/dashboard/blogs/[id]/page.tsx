@@ -11,6 +11,7 @@ import Image from "next/image";
 import { useParams, useRouter } from "next/navigation";
 import dynamic from "next/dynamic";
 import { toast } from "sonner";
+import { ROUTES } from "@/routes";
 
 const QuillEditor = dynamic(
   () => import("@/components/shared/QuillEditor").then((m) => m.QuillEditor),
@@ -112,7 +113,7 @@ export default function EditBlogPage() {
         body: JSON.stringify(form),
       });
       toast.success("Blog updated successfully");
-      router.push("/dashboard/blogs");
+      router.push(ROUTES.DASHBOARD.BLOGS.LIST);
     } catch {
       toast.error("Failed to update blog");
     } finally {
@@ -206,7 +207,7 @@ export default function EditBlogPage() {
             <Button
               type="button"
               variant="outline"
-              onClick={() => router.push("/dashboard/blogs")}
+              onClick={() => router.push(ROUTES.DASHBOARD.BLOGS.LIST)}
             >
               Cancel
             </Button>

@@ -123,7 +123,7 @@ export default function BlogsPage() {
         <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-3">
           {filteredBlogs.map((blog) => (
             <article
-              key={blog.id}
+              key={blog._id}
               className="flex flex-col bg-white dark:bg-muted rounded-3xl overflow-hidden border border-mafaaheem-gold/10 shadow-sm"
               // set direction per-blog, in case blog has its own language
               dir={blog.language === "ar" || blog.language === "ur" ? "rtl" : "ltr"}

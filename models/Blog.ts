@@ -1,7 +1,7 @@
 import { Document, Schema, model, models } from "mongoose";
 
 export interface IBlog extends Document {
-  id: string;
+  _id: string;
   title: string;
   slug: string;
   language: 'en' | 'ur' | 'ar';

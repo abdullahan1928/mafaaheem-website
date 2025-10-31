@@ -44,16 +44,14 @@ const DashboardSidebar = () => {
 
   return (
     <Sidebar collapsible="icon">
-      <SidebarHeader>
-        <div className="flex items-center gap-2 px-4 py-2 w-full justify-center">
-          <Image
-            src="/images/logo/mafaaheem.png"
-            alt="Mafaaheem Logo"
-            width={1000}
-            height={1000}
-            className="w-1/2 h-auto"
-          />
-        </div>
+      <SidebarHeader className="flex items-center gap-2 px-4 py-2 w-full justify-center">
+        <Image
+          src="/images/logo/mafaaheem.png"
+          alt="Mafaaheem Logo"
+          width={1000}
+          height={1000}
+          className="w-1/2 h-auto"
+        />
       </SidebarHeader>
 
       <SidebarContent>
