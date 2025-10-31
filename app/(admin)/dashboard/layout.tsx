@@ -1,4 +1,4 @@
-import { AdminDashboardLayout } from "@/components/layout/admin/AdminDashboard";
+import { AdminDashboardLayout } from "@/components/layout/admin/DashboardLayout";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {

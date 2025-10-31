@@ -39,7 +39,7 @@ export default function AdminBlogsPage() {
                 {blog.excerpt || blog.content.slice(0, 100) + "..."}
               </p>
               <div className="flex justify-between">
-                <Link href={`/admin/blogs/${blog._id}`}>
+                <Link href={ROUTES.DASHBOARD.BLOGS.VIEW(blog.slug)}>
                   <Button variant="outline" size="sm">Edit</Button>
                 </Link>
                 <Button variant={blog.published ? "default" : "secondary"} size="sm">

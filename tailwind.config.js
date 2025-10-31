@@ -1,4 +1,5 @@
 import tailwindcssAnimate from "tailwindcss-animate";
+import typographyPlugin from "@tailwindcss/typography";
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
@@ -160,7 +161,10 @@ module.exports = {
       fontFamily: {
         'sans': ['Inter', 'sans-serif'],
       },
-      plugins: [tailwindcssAnimate],
-    }
-  }
+    },
+  },
+  plugins: [
+    tailwindcssAnimate,
+    typographyPlugin
+  ],
 }

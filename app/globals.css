@@ -182,11 +182,8 @@
 
 .decoration::before {
   content: '';
-  width: 10px;
-  height: 10px;
   transform: rotate(45deg);
   background: linear-gradient(135deg, #D4AF37, #F6E27F);
-  box-shadow: 0 0 10px rgba(212, 175, 55, 0.4);
   border-radius: 2px;
 }
 
@@ -214,6 +211,10 @@
   .decoration::after {
     width: 50px;
     transform: rotate(0deg);
-    /* line horizontal again */
   }
+}
+
+.prose code,
+.prose .ql-code-block-container {
+  font-family: 'Amiri', serif !important;
 }

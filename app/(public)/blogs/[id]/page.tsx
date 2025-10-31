@@ -4,26 +4,26 @@ import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
-
-interface BlogPost {
-  id: number;
-  title: string;
-  content: string;
-  date: string;
-  image?: string;
-}
+import { IBlog } from "@/models/Blog";
+import { Language } from "@/contexts/LanguageContext"
 
 export default function BlogDetailPage() {
   const { id } = useParams();
-  const [blog, setBlog] = useState<BlogPost | null>(null);
+  const [blog, setBlog] = useState<IBlog | null>(null);
   const [loading, setLoading] = useState(true);
+  const [isRTL, setIsRTL] = useState(false);
 
   useEffect(() => {
     const fetchBlog = async () => {
       try {
         const res = await fetch(`/api/blogs/${id}`);
         const data = await res.json();
+        console.log("data", data)
         setBlog(data);
+
+        if (data.language !== "en") {
+          setIsRTL(true)
+        }
       } catch (error) {
         console.error("Error fetching blog:", error);
       } finally {
@@ -60,11 +60,11 @@ export default function BlogDetailPage() {
       {/* Header */}
       <div className="max-w-4xl mx-auto text-center mb-12">
         <h1
-          className="text-3xl md:text-5xl font-bold text-mafaaheem-brown mb-6 leading-tight"
+          className={`text-3xl md:text-5xl font-bold text-mafaaheem-brown mb-6 leading-tight ${blog.language === "ur" && "urdu"} ${blog.language === "ar" && "arabic"}`}
           dangerouslySetInnerHTML={{ __html: blog.title }}
         />
         <p className="text-sm text-muted-foreground">
-          {new Date(blog.date).toLocaleDateString("en-US", {
+          {new Date(blog.createdAt).toLocaleDateString("en-US", {
             year: "numeric",
             month: "long",
             day: "numeric",
@@ -88,7 +88,7 @@ export default function BlogDetailPage() {
 
       {/* Blog Content */}
       <article
-        className="prose dark:prose-invert max-w-4xl mx-auto text-justify leading-relaxed prose-headings:text-mafaaheem-brown prose-p:text-muted-foreground prose-a:text-mafaaheem-gold hover:prose-a:text-mafaaheem-brown prose-img:rounded-2xl prose-img:shadow-sm urdu"
+        className={`prose max-w-4xl mx-auto text-justify leading-relaxed prose-headings:text-mafaaheem-brown prose-p:text-muted-foreground prose-a:text-mafaaheem-gold hover:prose-a:text-mafaaheem-brown prose-img:rounded-2xl prose-img:shadow-sm ${isRTL && "!text-right"} ${blog.language === "ur" && "urdu"} ${blog.language === "ar" && "arabic"}`}
         dangerouslySetInnerHTML={{ __html: blog.content }}
       />
 
