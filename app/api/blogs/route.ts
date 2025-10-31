@@ -32,7 +32,10 @@ import Blog from "@/models/Blog";
 
 export async function GET() {
   try {
+    console.log("MONGO_URI:", process.env.MONGO_URI);
+    console.log("Getting blogs")
     const blogs = await Blog.find().sort({ createdAt: -1 });
+    console.log("Blogs", blogs)
     return NextResponse.json(blogs);
   } catch (error) {
     return NextResponse.json(
