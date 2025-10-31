@@ -6,7 +6,12 @@ import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
 import { ROUTES } from "@/routes";
-import QuillEditor from "@/components/shared/QuillEditor";
+import dynamic from "next/dynamic";
+
+const QuillEditor = dynamic(
+  () => import("@/components/shared/QuillEditor").then((m) => m.QuillEditor),
+  { ssr: false }
+);
 
 export default function NewBlogPage() {
   const [form, setForm] = useState({
