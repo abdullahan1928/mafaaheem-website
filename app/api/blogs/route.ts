@@ -33,7 +33,7 @@ import connectDB from "@/lib/mongodb";
 
 export async function GET() {
   try {
-    connectDB();
+    await connectDB();
     console.log("MONGO_URI:", process.env.MONGO_URI);
     console.log("Getting blogs")
     const blogs = await Blog.find().sort({ createdAt: -1 });
@@ -49,7 +49,7 @@ export async function GET() {
 
 export async function POST(req: Request) {
   try {
-    connectDB();
+    await connectDB();
     const body = await req.json();
     const blog = await Blog.create(body);
     return NextResponse.json(blog);
