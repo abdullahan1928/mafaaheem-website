@@ -1,0 +1,43 @@
+export const blogsContent = {
+    en: {
+        heading: "Reflections & Articles",
+        subtitle: "Thoughtful writings and contemplations from the scholars of Mafaaheem Institute.",
+        searchPlaceholder: "Search articles...",
+        filterAll: "All",
+        filterEnglish: "English",
+        filterUrdu: "Urdu",
+        filterArabic: "Arabic",
+        loading: "Loading articles...",
+        noBlogs: "No blogs found.",
+        readMore: "Read More",
+        dateAria: "Published on",
+    },
+
+    ur: {
+        heading: "مقالات و تاثرات",
+        subtitle: "مفاہیم انسٹی ٹیوٹ کے علما کی سوچ و تحریر۔",
+        searchPlaceholder: "مضمون تلاش کریں...",
+        filterAll: "سب",
+        filterEnglish: "انگریزی",
+        filterUrdu: "اردو",
+        filterArabic: "عربی",
+        loading: "مضامین لوڈ ہو رہے ہیں...",
+        noBlogs: "کوئی مضمون نہیں ملا۔",
+        readMore: "مزید پڑھیں",
+        dateAria: "شائع شدہ تاریخ",
+    },
+
+    ar: {
+        heading: "تأملات ومقالات",
+        subtitle: "كتابات وتأملات من علماء معهد مفاهيم.",
+        searchPlaceholder: "ابحث في المقالات...",
+        filterAll: "الكل",
+        filterEnglish: "الإنجليزية",
+        filterUrdu: "الأوردو",
+        filterArabic: "العربية",
+        loading: "جارٍ تحميل المقالات...",
+        noBlogs: "لم يتم العثور على مقالات.",
+        readMore: "اقرأ المزيد",
+        dateAria: "تاريخ النشر",
+    },
+} as const;
