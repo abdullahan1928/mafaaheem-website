@@ -1,3 +1,4 @@
+import connectDB from "@/lib/mongodb";
 import Blog from "@/models/Blog";
 import { NextResponse } from "next/server";
 
@@ -45,6 +46,7 @@ export async function GET(
   { params }: { params: Promise<{ id: string; }> }
 ) {
   try {
+    await connectDB();
     const { id } = await params;
     const blog = await Blog.findOne({ slug: id });
 
@@ -66,6 +68,7 @@ export async function PUT(
   { params }: { params: Promise<{ id: string; }> }
 ) {
   try {
+    await connectDB();
     const { id } = await params;
     const data = await request.json();
 

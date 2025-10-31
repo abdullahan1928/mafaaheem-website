@@ -2,12 +2,12 @@ import { NextResponse } from "next/server";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcryptjs";
 import Admin from "@/models/Admin";
+import connectDB from "@/lib/mongodb";
 
 export async function POST(req: Request) {
   try {
+    await connectDB();
     const { email, password } = await req.json();
-    console.log("email", email)
-    console.log("password", password)
     const admin = await Admin.findOne({ email });
     console.log("admin", admin)
     if (!admin) return NextResponse.json({ error: "Invalid credentials" }, { status: 401 });

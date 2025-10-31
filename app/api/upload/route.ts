@@ -12,9 +12,6 @@ const s3 = new S3Client({
 
 export async function POST(req: Request) {
   try {
-    console.log("process.env.AWS_REGION", process.env.AWS_REGION)
-    console.log("process.env.AWS_ACCESS_KEY_ID", process.env.AWS_ACCESS_KEY_ID)
-    console.log("process.env.AWS_SECRET_ACCESS_KEY", process.env.AWS_SECRET_ACCESS_KEY)
     const { fileName, fileType } = await req.json(); // ✅ parse JSON instead of formData
 
     const key = `blogs/${Date.now()}-${fileName}`;
