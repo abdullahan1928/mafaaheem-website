@@ -7,7 +7,7 @@ import { Mail, Users, Sparkles } from "lucide-react"
 import { useContactModal } from "@/contexts/ContactModalContext"
 import { useLanguage } from "@/contexts/LanguageContext"
 import Image from "next/image"
-import { teamContent, teamData } from "@/data/team"
+import { teamContent, TEAM } from "@/data/team"
 import Head from "next/head"
 
 const Team = () => {
@@ -34,8 +34,8 @@ const Team = () => {
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
 
-  const coreTeam = teamData.filter((member) => member.teamType === "core")
-  const extendedTeam = teamData.filter((member) => member.teamType === "extended")
+  const coreTeam = TEAM.filter((member) => member.teamType === "core")
+  const extendedTeam = TEAM.filter((member) => member.teamType === "extended")
 
   // Multilingual Metadata
   const meta = {

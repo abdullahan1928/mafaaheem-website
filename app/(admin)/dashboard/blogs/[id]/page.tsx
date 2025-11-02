@@ -12,6 +12,7 @@ import { useParams, useRouter } from "next/navigation";
 import dynamic from "next/dynamic";
 import { toast } from "sonner";
 import { ROUTES } from "@/routes";
+import { S3_FOLDER } from "@/lib/s3";
 
 const QuillEditor = dynamic(
   () => import("@/components/shared/QuillEditor").then((m) => m.QuillEditor),
@@ -81,7 +82,7 @@ export default function EditBlogPage() {
     try {
       const res = await fetch("/api/upload", {
         method: "POST",
-        body: JSON.stringify({ fileName: file.name, fileType: file.type }),
+        body: JSON.stringify({ fileName: file.name, fileType: file.type, folderName: S3_FOLDER.BLOGS }),
       });
       const { url, key } = await res.json();
 

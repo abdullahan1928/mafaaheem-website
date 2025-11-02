@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { S3Client, PutObjectCommand, DeleteObjectCommand } from "@aws-sdk/client-s3";
+import { S3Client, PutObjectCommand, DeleteObjectCommand, ListObjectsV2Command } from "@aws-sdk/client-s3";
 import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
 
 const s3 = new S3Client({
@@ -12,17 +12,35 @@ const s3 = new S3Client({
 
 export async function POST(req: Request) {
   try {
-    const { fileName, fileType } = await req.json(); // ✅ parse JSON instead of formData
+    const { fileName, fileType, folderName } = await req.json();
 
-    const key = `blogs/${Date.now()}-${fileName}`;
+    const bucket = process.env.AWS_S3_BUCKET_NAME!;
+    const folderKey = `${folderName}/`;
+
+    const listCommand = new ListObjectsV2Command({
+      Bucket: bucket,
+      Prefix: folderKey,
+      MaxKeys: 1,
+    });
+
+    const result = await s3.send(listCommand);
+
+    if (!result.Contents || result.Contents.length === 0) {
+      const createFolderCommand = new PutObjectCommand({
+        Bucket: bucket,
+        Key: folderKey,
+      });
+      await s3.send(createFolderCommand);
+    }
+
+    const key = `${folderName}/${Date.now()}-${fileName}`;
     const command = new PutObjectCommand({
-      Bucket: process.env.AWS_S3_BUCKET_NAME!,
+      Bucket: bucket,
       Key: key,
       ContentType: fileType,
     });
 
     const url = await getSignedUrl(s3, command, { expiresIn: 60 });
-    console.log("url", url)
     return NextResponse.json({ url, key });
   } catch (err) {
     console.error("S3 Upload Error:", err);

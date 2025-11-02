@@ -1,7 +1,7 @@
 import { cookies } from "next/headers"
 import Course from "./Course"
 import { Language } from "@/contexts/LanguageContext"
-import { coursesData } from "@/data/course"
+import { COURSES } from "@/data/course"
 import { Metadata } from "next"
 
 export async function generateMetadata({ params }: { params: { id: string } }): Promise<Metadata> {
@@ -10,7 +10,7 @@ export async function generateMetadata({ params }: { params: { id: string } }): 
   const { id } = await params;
   console.log("params.id", id)
 
-  const course = coursesData.find((c) => c.id === id)
+  const course = COURSES.find((c) => c.id === id)
 
   if (!course) {
     const notFoundMeta = {

@@ -120,7 +120,88 @@ export interface ICourse {
   }
 }
 
-export const coursesData: ICourse[] = [
+export const courseContent = {
+  en: {
+    loading: "Loading course details...",
+    notFound: "Course Not Found",
+    notFoundDescription:
+      "The course you're looking for doesn't exist or has been removed.",
+    backToCourses: "Back to Courses",
+    enrollNow: "Enroll Now",
+    enrolledText: "enrolled",
+    overview: "Course Overview",
+    objectives: "Learning Objectives",
+    modules: "Course Modules",
+    instructors: "Course Instructors",
+    details: "Course Details",
+    detailsSubtitle: "Everything you need to know",
+    lessons: "lessons",
+    duration: "Duration",
+    startDate: "Start Date",
+    schedule: "Schedule",
+    students: "students",
+    features: "What You'll Get",
+    overviewDesc:
+      "This module covers essential concepts and practical applications. You'll engage with classical texts, participate in discussions, and complete assignments to deepen your understanding.",
+    bookBy: "Book by",
+    featured: "Featured",
+    viewDetails: "View Details"
+  },
+  ur: {
+    loading: "کورس کی تفصیلات لوڈ ہو رہی ہیں...",
+    notFound: "کورس نہیں ملا",
+    notFoundDescription:
+      "جو کورس آپ تلاش کر رہے ہیں وہ موجود نہیں ہے یا ہٹایا جا چکا ہے۔",
+    backToCourses: "کورسز پر واپس جائیں",
+    enrollNow: "اب رجسٹر کریں",
+    enrolledText: "داخل",
+    overview: "کورس کا جائزہ",
+    objectives: "سیکھنے کے مقاصد",
+    modules: "کورس ماڈیولز",
+    instructors: "کورس کے اساتذہ",
+    details: "کورس کی تفصیلات",
+    detailsSubtitle: "آپ کو جاننے کی ضرورت ہے سب کچھ",
+    lessons: "اسباق",
+    duration: "مدت",
+    startDate: "شروعات کی تاریخ",
+    schedule: "شیڈول",
+    students: "طلباء",
+    features: "آپ کو کیا ملے گا",
+    overviewDesc:
+      "یہ ماڈیول ضروری تصورات اور عملی اطلاقات کا احاطہ کرتا ہے۔ آپ کلاسیکی متون کے ساتھ منسلک ہوں گے، بحث میں حصہ لیں گے، اور اپنی سمجھ کو گہرا کرنے کے لیے کام مکمل کریں گے۔",
+    bookBy: "مصنف",
+    featured: "نمایاں",
+    viewDetails: "تفصیلات دیکھیں"
+  },
+  ar: {
+    loading: "جاري تحميل تفاصيل الدورة...",
+    notFound: "لم يتم العثور على الدورة",
+    notFoundDescription:
+      "الدورة التي تبحث عنها غير موجودة أو تم حذفها.",
+    backToCourses: "العودة إلى الدورات",
+    enrollNow: "التحق الآن",
+    enrolledText: "مسجل",
+    overview: "نظرة عامة على الدورة",
+    objectives: "أهداف التعلم",
+    modules: "وحدات الدورة",
+    instructors: "مدرسو الدورة",
+    details: "تفاصيل الدورة",
+    detailsSubtitle: "كل ما تحتاج إلى معرفته",
+    lessons: "دروس",
+    duration: "المدة",
+    startDate: "تاريخ البدء",
+    schedule: "الجدول الزمني",
+    students: "الطلاب",
+    features: "ما ستحصل عليه",
+    overviewDesc:
+      "تغطي هذه الوحدة المفاهيم الأساسية والتطبيقات العملية. ستتعامل مع النصوص الكلاسيكية وتشارك في النقاشات وتكمل المهام لتعميق فهمك.",
+    bookBy: "تأليف",
+    featured: "مميز",
+    viewDetails: "عرض التفاصيل"
+  },
+}
+
+export const COURSES: ICourse[] = [
   {
     id: "systematic-building",
     title: {
@@ -470,84 +551,3 @@ export const coursesData: ICourse[] = [
     },
   },
 ]
-
-export const courseContent = {
-  en: {
-    loading: "Loading course details...",
-    notFound: "Course Not Found",
-    notFoundDescription:
-      "The course you're looking for doesn't exist or has been removed.",
-    backToCourses: "Back to Courses",
-    enrollNow: "Enroll Now",
-    enrolledText: "enrolled",
-    overview: "Course Overview",
-    objectives: "Learning Objectives",
-    modules: "Course Modules",
-    instructors: "Course Instructors",
-    details: "Course Details",
-    detailsSubtitle: "Everything you need to know",
-    lessons: "lessons",
-    duration: "Duration",
-    startDate: "Start Date",
-    schedule: "Schedule",
-    students: "students",
-    features: "What You'll Get",
-    overviewDesc:
-      "This module covers essential concepts and practical applications. You'll engage with classical texts, participate in discussions, and complete assignments to deepen your understanding.",
-    bookBy: "Book by",
-    featured: "Featured",
-    viewDetails: "View Details"
-  },
-  ur: {
-    loading: "کورس کی تفصیلات لوڈ ہو رہی ہیں...",
-    notFound: "کورس نہیں ملا",
-    notFoundDescription:
-      "جو کورس آپ تلاش کر رہے ہیں وہ موجود نہیں ہے یا ہٹایا جا چکا ہے۔",
-    backToCourses: "کورسز پر واپس جائیں",
-    enrollNow: "اب رجسٹر کریں",
-    enrolledText: "داخل",
-    overview: "کورس کا جائزہ",
-    objectives: "سیکھنے کے مقاصد",
-    modules: "کورس ماڈیولز",
-    instructors: "کورس کے اساتذہ",
-    details: "کورس کی تفصیلات",
-    detailsSubtitle: "آپ کو جاننے کی ضرورت ہے سب کچھ",
-    lessons: "اسباق",
-    duration: "مدت",
-    startDate: "شروعات کی تاریخ",
-    schedule: "شیڈول",
-    students: "طلباء",
-    features: "آپ کو کیا ملے گا",
-    overviewDesc:
-      "یہ ماڈیول ضروری تصورات اور عملی اطلاقات کا احاطہ کرتا ہے۔ آپ کلاسیکی متون کے ساتھ منسلک ہوں گے، بحث میں حصہ لیں گے، اور اپنی سمجھ کو گہرا کرنے کے لیے کام مکمل کریں گے۔",
-    bookBy: "مصنف",
-    featured: "نمایاں",
-    viewDetails: "تفصیلات دیکھیں"
-  },
-  ar: {
-    loading: "جاري تحميل تفاصيل الدورة...",
-    notFound: "لم يتم العثور على الدورة",
-    notFoundDescription:
-      "الدورة التي تبحث عنها غير موجودة أو تم حذفها.",
-    backToCourses: "العودة إلى الدورات",
-    enrollNow: "التحق الآن",
-    enrolledText: "مسجل",
-    overview: "نظرة عامة على الدورة",
-    objectives: "أهداف التعلم",
-    modules: "وحدات الدورة",
-    instructors: "مدرسو الدورة",
-    details: "تفاصيل الدورة",
-    detailsSubtitle: "كل ما تحتاج إلى معرفته",
-    lessons: "دروس",
-    duration: "المدة",
-    startDate: "تاريخ البدء",
-    schedule: "الجدول الزمني",
-    students: "الطلاب",
-    features: "ما ستحصل عليه",
-    overviewDesc:
-      "تغطي هذه الوحدة المفاهيم الأساسية والتطبيقات العملية. ستتعامل مع النصوص الكلاسيكية وتشارك في النقاشات وتكمل المهام لتعميق فهمك.",
-    bookBy: "تأليف",
-    featured: "مميز",
-    viewDetails: "عرض التفاصيل"
-  },
-}

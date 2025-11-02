@@ -67,7 +67,7 @@ export const teamContent = {
     },
 }
 
-export const teamData = [
+export const TEAM = [
     {
         id: 1,
         name: "Ustaaz Abdul Haseeb Usmani",

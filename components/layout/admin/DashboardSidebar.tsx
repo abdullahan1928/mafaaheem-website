@@ -43,7 +43,7 @@ const DashboardSidebar = () => {
   };
 
   return (
-    <Sidebar collapsible="icon">
+    <Sidebar collapsible="icon" dir='right'>
       <SidebarHeader className="flex items-center gap-2 px-4 py-2 w-full justify-center">
         <Image
           src="/images/logo/mafaaheem.png"

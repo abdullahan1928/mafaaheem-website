@@ -61,7 +61,7 @@ export default function BlogsPage() {
       dir={isRTL ? "rtl" : "ltr"}
     >
       <div className="max-w-5xl mx-auto text-center mb-10">
-        <h1 className="text-4xl md:text-5xl font-extrabold text-mafaaheem-brown mb-3">
+        <h1 className="text-4xl md:text-5xl font-extrabold text-mafaaheem-brown mb-3 urdu-italic">
           {content.heading}
         </h1>
         <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
@@ -106,7 +106,7 @@ export default function BlogsPage() {
       {/* States */}
       {loading && (
         <div className="flex items-center justify-center py-20 text-muted-foreground">
-          {content.loading}
+          {content.loadingAll}
         </div>
       )}
 
@@ -125,7 +125,6 @@ export default function BlogsPage() {
             <article
               key={blog._id}
               className="flex flex-col bg-white dark:bg-muted rounded-3xl overflow-hidden border border-mafaaheem-gold/10 shadow-sm"
-              // set direction per-blog, in case blog has its own language
               dir={blog.language === "ar" || blog.language === "ur" ? "rtl" : "ltr"}
             >
               {/* Image */}
@@ -152,7 +151,7 @@ export default function BlogsPage() {
                 </div>
 
                 <h3
-                  className={`!text-2xl font-semibold text-mafaaheem-brown leading-snug mb-4 line-clamp-2 ${blog.language === "ur" && "urdu"} ${blog.language === "ar" && "arabic"}`}
+                  className={`!text-2xl font-semibold text-mafaaheem-brown leading-snug mb-4 line-clamp-2 urdu-italic ${blog.language === "ur" && "urdu italic"} ${blog.language === "ar" && "arabic"}`}
                   dangerouslySetInnerHTML={{ __html: blog.title }}
                 />
 

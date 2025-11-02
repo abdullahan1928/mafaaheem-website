@@ -4,7 +4,7 @@ import { useEffect, useRef } from "react"
 import { Button } from "../ui/button"
 import { BookText, Clock, Calendar, ArrowRight, ArrowLeft } from "lucide-react"
 import { useLanguage } from "@/contexts/LanguageContext"
-import { CategoryLabels, coursesData } from "@/data/course"
+import { CategoryLabels, COURSES } from "@/data/course"
 import Link from "next/link"
 import Image from "next/image"
 import { ROUTES } from "@/routes"
@@ -40,7 +40,7 @@ const ProgramsSection = () => {
     }
   }, [])
 
-  const programs = coursesData.filter((course) => course.featured).slice(0, 2)
+  const programs = COURSES.filter((course) => course.featured).slice(0, 2)
 
   return (
     <section id="programs" className="py-24 bg-white" ref={sectionRef}>

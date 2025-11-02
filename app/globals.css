@@ -5,6 +5,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@400;700&display=swap');
 @import url('https://cdn.jsdelivr.net/gh/urduweb/font-jameel-noori-nastaleeq/font.css');
 
+@font-face {
+  font-family: 'Jameel Noori Nastaleeq Kasheeda';
+  src: url('/fonts/JameelNooriNastaliqKasheeda3.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -141,6 +149,14 @@
 .urdu {
   font-size: 1.2rem;
   font-family: 'Jameel Noori Nastaleeq', serif !important;
+}
+
+.urdu .italic,
+.urdu .urdu-italic,
+.urdu-italic,
+.urdu em {
+  font-family: 'Jameel Noori Nastaleeq Kasheeda', serif !important;
+  word-spacing: 0.2rem;
 }
 
 .urdu button {

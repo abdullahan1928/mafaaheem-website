@@ -4,10 +4,17 @@ import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
+import { ArrowLeft, ArrowRight } from "lucide-react"; 
 import { IBlog } from "@/models/Blog";
-import { Language } from "@/contexts/LanguageContext"
+import { ROUTES } from "@/routes";
+import { useLanguage } from "@/contexts/LanguageContext";
+import { blogsContent } from "@/data/blogs";
+import { cn } from "@/lib/utils";
 
 export default function BlogDetailPage() {
+  const { language } = useLanguage();
+  const content = blogsContent[language];
+
   const { id } = useParams();
   const [blog, setBlog] = useState<IBlog | null>(null);
   const [loading, setLoading] = useState(true);
@@ -18,12 +25,9 @@ export default function BlogDetailPage() {
       try {
         const res = await fetch(`/api/blogs/${id}`);
         const data = await res.json();
-        console.log("data", data)
         setBlog(data);
 
-        if (data.language !== "en") {
-          setIsRTL(true)
-        }
+        if (data.language !== "en") setIsRTL(true);
       } catch (error) {
         console.error("Error fetching blog:", error);
       } finally {
@@ -36,20 +40,30 @@ export default function BlogDetailPage() {
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center text-muted-foreground">
-        Loading article...
+        {content.loadingSingle}
       </div>
     );
   }
 
   if (!blog) {
     return (
-      <div className="min-h-screen flex flex-col items-center justify-center text-muted-foreground">
-        <p>Blog not found.</p>
+      <div className="min-h-screen flex flex-col items-center justify-center text-muted-foreground text-center">
+        <p>{content.blogNotFound}</p>
         <Link
-          href="/blogs"
-          className="mt-4 text-mafaaheem-gold hover:text-mafaaheem-brown transition-colors"
+          href={ROUTES.PUBLIC.BLOGS.LIST}
+          className="mt-4 text-mafaaheem-gold hover:text-mafaaheem-brown transition-colors inline-flex items-center gap-2"
         >
-          ← Back to Blogs
+          {isRTL ? (
+            <>
+              {content.backToBlogs}
+              <ArrowRight size={18} />
+            </>
+          ) : (
+            <>
+              <ArrowLeft size={18} />
+              {content.backToBlogs}
+            </>
+          )}
         </Link>
       </div>
     );
@@ -60,7 +74,11 @@ export default function BlogDetailPage() {
       {/* Header */}
       <div className="max-w-4xl mx-auto text-center mb-12">
         <h1
-          className={`text-3xl md:text-5xl font-bold text-mafaaheem-brown mb-6 leading-tight ${blog.language === "ur" && "urdu"} ${blog.language === "ar" && "arabic"}`}
+          className={cn(
+            "text-3xl md:text-5xl font-bold text-mafaaheem-brown mb-6 leading-tight urdu-italic",
+            blog.language === "ur" ? "urdu" : "",
+            blog.language === "ar" ? "arabic" : ""
+          )}
           dangerouslySetInnerHTML={{ __html: blog.title }}
         />
         <p className="text-sm text-muted-foreground">
@@ -88,17 +106,32 @@ export default function BlogDetailPage() {
 
       {/* Blog Content */}
       <article
-        className={`prose max-w-4xl mx-auto text-justify leading-relaxed prose-headings:text-mafaaheem-brown prose-p:text-muted-foreground prose-a:text-mafaaheem-gold hover:prose-a:text-mafaaheem-brown prose-img:rounded-2xl prose-img:shadow-sm ${isRTL && "!text-right"} ${blog.language === "ur" && "urdu"} ${blog.language === "ar" && "arabic"}`}
+        className={cn(
+          "prose max-w-4xl mx-auto text-justify leading-relaxed prose-headings:text-mafaaheem-brown prose-p:text-muted-foreground prose-a:text-mafaaheem-gold hover:prose-a:text-mafaaheem-brown prose-img:rounded-2xl prose-img:shadow-sm",
+          isRTL && "!text-right",
+          blog.language === "ur" && "urdu",
+          blog.language === "ar" && "arabic"
+        )}
         dangerouslySetInnerHTML={{ __html: blog.content }}
       />
 
       {/* Back link */}
       <div className="max-w-4xl mx-auto mt-16 text-center">
         <Link
-          href="/blogs"
-          className="text-mafaaheem-gold hover:text-mafaaheem-brown transition-colors font-medium"
+          href={ROUTES.PUBLIC.BLOGS.LIST}
+          className="text-mafaaheem-gold hover:text-mafaaheem-brown transition-colors font-medium inline-flex items-center gap-2"
         >
-          ← Back to all blogs
+          {isRTL ? (
+            <>
+              {content.backToBlogs}
+              <ArrowRight size={18} />
+            </>
+          ) : (
+            <>
+              <ArrowLeft size={18} />
+              {content.backToBlogs}
+            </>
+          )}
         </Link>
       </div>
     </div>

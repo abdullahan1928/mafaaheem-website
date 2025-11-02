@@ -9,6 +9,7 @@ import { useRouter } from "next/navigation";
 import dynamic from "next/dynamic";
 import Image from "next/image";
 import { ROUTES } from "@/routes";
+import { S3_FOLDER } from "@/lib/s3";
 
 const QuillEditor = dynamic(
   () => import("@/components/shared/QuillEditor").then((m) => m.QuillEditor),
@@ -53,7 +54,7 @@ export default function NewBlogPage() {
       const res = await fetch("/api/upload", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ fileName: file.name, fileType: file.type }),
+        body: JSON.stringify({ fileName: file.name, fileType: file.type, folderName: S3_FOLDER.BLOGS }),
       });
       const { url, key } = await res.json();
 

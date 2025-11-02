@@ -135,7 +135,11 @@ export default function AdminBlogsPage() {
                 )}
                 <CardHeader>
                   <CardTitle
-                    className={`prose text-lg line-clamp-2 ${blog.language === "ur" && "urdu"} ${blog.language === "ar" && "arabic"}`}
+                    className={cn(
+                      "prose text-lg line-clamp-2 urdu-italic",
+                      blog.language === "ur" ? "urdu" : "",
+                      blog.language === "ar" ? "arabic" : ""
+                    )}
                     dangerouslySetInnerHTML={{ __html: blog.title }}
                   />
                 </CardHeader>
@@ -144,7 +148,11 @@ export default function AdminBlogsPage() {
                     {new Date(blog.createdAt).toLocaleDateString()}
                   </p>
                   <p
-                    className={`prose text-sm text-muted-foreground line-clamp-3 mb-4`}
+                    className={cn(
+                      "prose text-sm text-muted-foreground line-clamp-3 mb-4",
+                      blog.language === "ur" ? "urdu" : "",
+                      blog.language === "ar" ? "arabic" : ""
+                    )}
                     dangerouslySetInnerHTML={{ __html: blog.content }}
                   />
                   <div className="flex justify-between items-center">

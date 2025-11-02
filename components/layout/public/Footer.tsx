@@ -154,7 +154,7 @@ const Footer = () => {
                   size={18}
                   className="text-mafaaheem-gold flex-shrink-0 group-hover:scale-110 transition-transform"
                 />
-                <a href={`tel:${phone}`} className="text-white/80 hover:text-mafaaheem-gold transition-colors">
+                <a href={`tel:${phone}`} className="text-white/80 hover:text-mafaaheem-gold transition-colors english">
                   {phone}
                 </a>
               </li>
