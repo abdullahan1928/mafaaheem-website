@@ -369,7 +369,7 @@ export default function EditCourseForm() {
                 <SelectContent>
                   {Object.values(Category).map((cat) => (
                     <SelectItem key={cat} value={cat}>
-                      {CategoryLabels[cat as Category].en}
+                      {CategoryLabels[cat].en}
                     </SelectItem>
                   ))}
                 </SelectContent>

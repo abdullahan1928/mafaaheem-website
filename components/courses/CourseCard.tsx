@@ -36,7 +36,7 @@ const CourseCard = (course: ICourseDTO) => {
         )}
         <div className={`absolute top-3 ${isRTL ? "right-3" : "left-3"} z-20`}>
           <span className="bg-white/90 backdrop-blur-sm text-mafaaheem-brown text-xs font-medium px-3 py-1 rounded-full shadow-md">
-            {CategoryLabels[course.category as keyof typeof CategoryLabels]?.[language]}
+            {CategoryLabels[course.category]?.[language]}
           </span>
         </div>
 
@@ -60,7 +60,7 @@ const CourseCard = (course: ICourseDTO) => {
         </h3>
 
         {/* Author */}
-        {author && (
+        {author && author[language] !== "" && (
           <div className="flex items-center gap-1 text-sm italic mb-2">
             <span className="text-mafaaheem-green">
               {content.bookBy}

@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useRef } from "react"
+import { useEffect, useRef, useState } from "react"
 import { Button } from "../ui/button"
 import { BookText, Clock, Calendar, ArrowRight, ArrowLeft } from "lucide-react"
 import { useLanguage } from "@/contexts/LanguageContext"
@@ -10,11 +10,16 @@ import Image from "next/image"
 import { ROUTES } from "@/routes"
 import { programContent } from "@/data/programs"
 import SectionHeader from "../shared/SectionHeader"
+import { ICourseDTO } from "@/models/Course"
 
-const ProgramsSection = () => {
+const CourseSection = () => {
   const sectionRef = useRef<HTMLDivElement>(null)
   const { language, isRTL } = useLanguage()
   const content = programContent[language]
+
+  const [courses, setCourses] = useState<ICourseDTO[]>([])
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState<string | null>(null)
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -40,7 +45,22 @@ const ProgramsSection = () => {
     }
   }, [])
 
-  const programs = COURSES.filter((course) => course.featured).slice(0, 2)
+  useEffect(() => {
+    const fetchCourses = async () => {
+      try {
+        setLoading(true)
+        const res = await fetch("/api/courses")
+        if (!res.ok) throw new Error("Failed to fetch courses")
+        const data = await res.json()
+        setCourses(data.data)
+      } catch (err: any) {
+        setError(err.message || "Error loading courses")
+      } finally {
+        setLoading(false)
+      }
+    }
+    fetchCourses()
+  }, [])
 
   return (
     <section id="programs" className="py-24 bg-white" ref={sectionRef}>
@@ -53,29 +73,29 @@ const ProgramsSection = () => {
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-12">
-          {programs.map((program, index) => (
+          {courses.map((course, index) => (
             <div
-              key={program.id}
+              key={course.id}
               className="bg-white rounded-2xl overflow-hidden shadow-lg border border-gray-100 transition-all hover:shadow-2xl hover:border-mafaaheem-gold/30 scroll-reveal group transform hover:scale-105"
               style={{ animationDelay: `${index * 200}ms` }}
             >
               <div className="relative h-56 sm:h-64 md:h-72 overflow-hidden">
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-black/20 z-10 group-hover:from-black/80 transition-all duration-300"></div>
                 <Image
-                  src={program.image || "/placeholder.svg"}
-                  alt={program.title[language]}
+                  src={course.image || "/placeholder.svg"}
+                  alt={course.translations.title[language]}
                   width={600}
                   height={400}
                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                 />
                 <div className={`absolute top-4 sm:top-6 z-20 ${isRTL ? "right-4 sm:right-6" : "left-4 sm:left-6"}`}>
                   <span className="bg-mafaaheem-gold/95 text-white text-[10px] sm:text-xs font-bold uppercase px-3 sm:px-4 py-1.5 sm:py-2 rounded-full shadow-lg">
-                    {CategoryLabels[program.category][language]}
+                    {CategoryLabels[course.category][language]}
                   </span>
                 </div>
                 <div className={`absolute bottom-4 sm:bottom-6 z-20 ${isRTL ? "right-6 left-6 text-right" : "left-6 right-6"}`}>
                   <h3 className="text-2xl sm:text-3xl font-bold text-white mb-1 sm:mb-2">
-                    {program.title[language]}
+                    {course.translations.title[language]}
                   </h3>
                 </div>
               </div>
@@ -84,7 +104,7 @@ const ProgramsSection = () => {
                 <div className="flex flex-wrap items-center gap-4 sm:gap-6 mb-6 pb-6 border-b border-gray-100">
                   <div className="flex items-center gap-2 text-xs sm:text-sm font-semibold text-gray-700">
                     <Clock className="h-4 w-4 sm:h-5 sm:w-5 text-mafaaheem-brown" />
-                    <span>{program.duration[language]}</span>
+                    <span>{course.translations.duration[language]}</span>
                   </div>
                   <div className="flex items-center gap-2 text-xs sm:text-sm font-semibold text-gray-700">
                     <Calendar className="h-4 w-4 sm:h-5 sm:w-5 text-mafaaheem-green" />
@@ -93,7 +113,7 @@ const ProgramsSection = () => {
                 </div>
 
                 <p className="text-gray-600 mb-6 leading-relaxed text-sm sm:text-base">
-                  {program.description[language]}
+                  {course.translations.description[language]}
                 </p>
 
                 <div className="mb-8">
@@ -102,7 +122,7 @@ const ProgramsSection = () => {
                     {content.featuresText}
                   </h4>
                   <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3">
-                    {program.features[language].map((feature, i) => (
+                    {course.translations.features[language].map((feature, i) => (
                       <li
                         key={i}
                         className="flex items-start gap-2 sm:gap-3 text-xs sm:text-sm text-gray-700"
@@ -114,7 +134,7 @@ const ProgramsSection = () => {
                   </ul>
                 </div>
 
-                <Link href={ROUTES.PUBLIC.COURSES.VIEW(program.id)} className="block">
+                <Link href={ROUTES.PUBLIC.COURSES.VIEW(course.id)} className="block">
                   <Button className="w-full text-white font-semibold py-5 sm:py-6 rounded-lg flex items-center justify-center gap-2 transition-all text-sm sm:text-base">
                     {content.viewText}
                     {isRTL ? <ArrowLeft className="h-4 w-4" /> : <ArrowRight className="h-4 w-4" />}
@@ -142,4 +162,4 @@ const ProgramsSection = () => {
   )
 }
 
-export default ProgramsSection
+export default CourseSection

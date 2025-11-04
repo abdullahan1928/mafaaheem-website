@@ -1,3 +1,4 @@
+import { Category } from "@/data/course";
 import { Schema, model, models, Document } from "mongoose";
 
 export type Lang = "en" | "ur" | "ar";
@@ -9,7 +10,7 @@ export interface ICourseTranslations {
   longDescription: Record<Lang, string>;
   duration: Record<Lang, string>;
   schedule: Record<Lang, string>;
-  startDateText?: Record<Lang, string>; // optional localized display date
+  startDateText?: Record<Lang, string>;
   features: Record<Lang, string[]>;
   objectives: Record<Lang, string[]>;
 }
@@ -41,18 +42,18 @@ export interface ICourse extends Document {
 }
 
 export interface ICourseDTO {
-  id: string; 
+  id: string;
   slug: string;
   image?: string;
   students?: number;
-  category: string;
+  category: Category;
   featured?: boolean;
   enrollmentUrl?: string;
   translations: ICourseTranslations;
   instructors: IInstructor[];
   modules: IModule[];
   createdAt: string;
-  updatedAt: string; 
+  updatedAt: string;
 }
 
 

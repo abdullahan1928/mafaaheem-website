@@ -30,7 +30,6 @@ const Courses = ({ initialCourses }: CoursesProps) => {
   }
   const allCategoryLabel = allCategoryLabels[language] || allCategoryLabels.en
 
-  /** Fetch Courses */
   useEffect(() => {
     const fetchCourses = async () => {
       try {
@@ -48,11 +47,10 @@ const Courses = ({ initialCourses }: CoursesProps) => {
     fetchCourses()
   }, [])
 
-  /** Get category labels dynamically */
   const categories = [
     allCategoryLabel,
     ...new Set(
-      courses.map((course) => CategoryLabels[course.category as keyof typeof CategoryLabels]?.[language])
+      courses.map((course) => CategoryLabels[course.category]?.[language])
     ),
   ]
 
@@ -66,7 +64,7 @@ const Courses = ({ initialCourses }: CoursesProps) => {
         .toLowerCase()
         .includes(searchTerm.toLowerCase())
 
-    const courseCategory = CategoryLabels[course.category as keyof typeof CategoryLabels]?.[language]
+    const courseCategory = CategoryLabels[course.category]?.[language]
     const matchesCategory =
       selectedCategory === null ||
       selectedCategory === allCategoryLabel ||
