@@ -55,12 +55,17 @@ export const ROUTES = {
     INDEX: "",
     BLOGS: withPrefix("blogs", {
       LIST: "",
-      VIEW: (id: string) => `${id}`,
+      EDIT: (slug: string) => `${slug}`,
       NEW: "new",
     }),
     EVENTS: withPrefix("events", {
       LIST: "",
-      VIEW: (id: string) => `${id}`,
+      EDIT: (id: string) => `${id}`,
+      NEW: "new",
+    }),
+    COURSES: withPrefix("courses", {
+      LIST: "",
+      EDIT: (id: string) => `${id}`,
       NEW: "new",
     }),
   }),

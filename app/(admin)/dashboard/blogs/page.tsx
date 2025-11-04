@@ -156,7 +156,7 @@ export default function AdminBlogsPage() {
                     dangerouslySetInnerHTML={{ __html: blog.content }}
                   />
                   <div className="flex justify-between items-center">
-                    <Link href={ROUTES.DASHBOARD.BLOGS.VIEW(blog.slug)}>
+                    <Link href={ROUTES.DASHBOARD.BLOGS.EDIT(blog.slug)}>
                       <Button variant="outline" size="sm">
                         Edit
                       </Button>

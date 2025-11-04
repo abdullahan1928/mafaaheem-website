@@ -25,7 +25,7 @@ import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { ROUTES } from '@/routes';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
-import { LogOut, BookOpen, CalendarDays, Home } from "lucide-react";
+import { LogOut, BookOpen, CalendarDays, Home, Calendar, Book } from "lucide-react";
 
 const DashboardSidebar = () => {
   const router = useRouter();
@@ -34,7 +34,8 @@ const DashboardSidebar = () => {
   const menuItems = [
     { title: "Dashboard", href: ROUTES.DASHBOARD.INDEX, icon: Home },
     { title: "Blogs", href: ROUTES.DASHBOARD.BLOGS.LIST, icon: BookOpen },
-    { title: "Events", href: ROUTES.DASHBOARD.EVENTS.LIST, icon: CalendarDays },
+    { title: "Events", href: ROUTES.DASHBOARD.EVENTS.LIST, icon: Calendar },
+    { title: "Courses", href: ROUTES.DASHBOARD.COURSES.LIST, icon: Book },
   ];
 
   const handleLogout = () => {

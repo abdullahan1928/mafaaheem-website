@@ -20,7 +20,8 @@ const QuillEditor = dynamic(
 );
 
 export default function EditBlogPage() {
-  const { id } = useParams();
+  const { slug } = useParams();
+
   const router = useRouter();
 
   const [form, setForm] = useState({
@@ -40,7 +41,7 @@ export default function EditBlogPage() {
   useEffect(() => {
     async function fetchBlog() {
       try {
-        const res = await fetch(`/api/blogs/${id}`);
+        const res = await fetch(`/api/blogs/${slug}`);
         const data = await res.json();
         setForm({
           title: data.title,
@@ -58,7 +59,7 @@ export default function EditBlogPage() {
       }
     }
     fetchBlog();
-  }, [id]);
+  }, [slug]);
 
   // Handle input changes
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -108,7 +109,7 @@ export default function EditBlogPage() {
     setSaving(true);
 
     try {
-      await fetch(`/api/blogs/${id}`, {
+      await fetch(`/api/blogs/${slug}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(form),

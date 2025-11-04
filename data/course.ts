@@ -215,9 +215,21 @@ export const COURSES: ICourse[] = [
       ar: "دورة شاملة مدتها أربع سنوات تبني المعرفة الإسلامية بشكل منهجي من المستويات الأساسية إلى المتقدمة.",
     },
     longDescription: {
-      en: "The Systematic Building program (البناء المنهجي) is Mafaaheem Institute's flagship educational initiative...",
-      ur: "منظم تعمیر پروگرام (البناء المنهجي) مفاہیم انسٹیٹیوٹ کی اہم تعلیمی پیشکش ہے، جو چار سال پر محیط ایک منظم اور جامع اسلامی تعلیمی نصاب فراہم کرتی ہے...",
-      ar: "برنامج البناء المنهجي هو المبادرة التعليمية الرئيسية لمعهد مفاهيم، حيث يقدم نهجاً منظماً وشاملاً للتعليم الإسلامي على مدى أربع سنوات...",
+      en: `The البناء المنھجی is Mafaaheem Institute's flagship educational initiative, offering a structured and comprehensive approach to Islamic education over four years. This program is designed for serious students who wish to gain a deep and systematic understanding of Islamic sciences, enabling them to become knowledgeable Muslims and potential future scholars.
+
+  The curriculum progresses methodically from foundational to advanced levels, covering all major Islamic disciplines including Quran, Hadith, Fiqh, Usul, Aqeedah, Arabic language, Islamic history, and contemporary issues. Each year builds upon the previous one, ensuring a coherent and integrated educational experience.
+
+  The program follows a traditional approach to Islamic learning while incorporating modern educational methodologies. Students will study classical texts under qualified scholars, engage in discussions, complete research assignments, and participate in practical application of knowledge.`,
+      ur: `البناء المنہجی مفاہیم انسٹیٹیوٹ کا نمایاں تعلیمی منصوبہ ہے جو چار سال پر محیط ایک منظم اور جامع اسلامی تعلیمی نصاب فراہم کرتا ہے۔ یہ پروگرام ان سنجیدہ طلبہ کے لیے تیار کیا گیا ہے جو علومِ اسلامیہ کی گہری اور منہجی سمجھ حاصل کرنا چاہتے ہیں تاکہ وہ باعلم مسلمان اور مستقبل کے ممکنہ علماء بن سکیں۔
+
+  نصاب کو بنیاد سے لے کر اعلیٰ سطح تک مرحلہ وار ترتیب دیا گیا ہے، جس میں قرآن، حدیث، فقہ، اصول فقہ، عقیدہ، عربی زبان، اسلامی تاریخ اور معاصر مسائل سمیت تمام بنیادی اسلامی علوم شامل ہیں۔ ہر سال پچھلے سال پر تعمیر کرتا ہے، جس سے ایک مربوط اور ہم آہنگ تعلیمی تجربہ یقینی بنایا جاتا ہے۔
+
+  پروگرام اسلامی تعلیم کے روایتی طریقۂ تدریس کو جدید تعلیمی اصولوں کے ساتھ یکجا کرتا ہے۔ طلبہ اہلِ علم اساتذہ کی نگرانی میں کلاسیکی متون کا مطالعہ کریں گے، علمی مباحث میں حصہ لیں گے، تحقیقی اسائنمنٹس مکمل کریں گے اور اپنے علم کو عملی طور پر بروئے کار لائیں گے۔`,
+      ar: `برنامج البناء المنهجي هو المبادرة التعليمية الرئيسية لمعهد مفاهيم، حيث يقدم نهجاً منظماً وشاملاً للتعليم الإسلامي على مدى أربع سنوات. صُمم هذا البرنامج للطلاب الجادين الذين يسعون إلى اكتساب فهم عميق ومنهجي للعلوم الإسلامية، ليصبحوا مسلمين واعين وعلماء محتملين في المستقبل.
+
+  يتدرج المنهج بشكل منهجي من المستويات التأسيسية إلى المستويات المتقدمة، ويغطي جميع العلوم الإسلامية الرئيسة بما في ذلك القرآن، الحديث، الفقه، أصول الفقه، العقيدة، اللغة العربية، التاريخ الإسلامي، والقضايا المعاصرة. ويُبنى كل عام على ما سبقه لضمان تجربة تعليمية متكاملة ومترابطة.
+
+  يتبع البرنامج المنهج التقليدي في طلب العلم مع الاستفادة من الأساليب التعليمية الحديثة. سيتعلم الطلاب المتون الكلاسيكية تحت إشراف العلماء المؤهلين، ويشاركون في المناقشات، ويكملون البحوث العلمية، ويطبقون ما تعلموه عملياً.`
     },
     image: "/images/programs/bina-al-manhaji.jpg",
     duration: {
@@ -401,9 +413,24 @@ export const COURSES: ICourse[] = [
       ar: "دورة تتعمق في دراسة استراتيجية النبي محمد ﷺ في بناء الإسلام ونشر دعوته المباركة.",
     },
     longDescription: {
-      en: "Fiqh-us-Seerah (فقہ السیرۃ) is an enriching course based on the work of Sheikh Muhammad Al Ghazali...",
-      ur: "فقہ السیرۃ شیخ محمد الغزالی کی معروف تصنیف پر مبنی ایک علمی اور روحانی کورس ہے، جو نبی کریم ﷺ کی سیرت کو حکمت، قیادت اور امت سازی کے زاویے سے سمجھنے میں مدد دیتا ہے...",
-      ar: "فقه السيرة دورة علمية مستندة إلى كتاب الشيخ محمد الغزالي، تهدف إلى دراسة حياة النبي ﷺ من زاوية المنهج القيادي والتربوي لبناء الأمة الإسلامية...",
+      en: `Fiqh-us-Seerah (فقہ السیرۃ) is an enriching course based on the celebrated work of Sheikh Muhammad Al Ghazali, designed to explore the life of the Prophet Muhammad ﷺ from a unique lens — one that highlights his ﷺ divine strategy, leadership, and nurturing of the noble companions (رضي الله عنهم). Rather than a chronological biography, this course offers a thematic and analytical study of the Prophet’s ﷺ mission to establish Islam, build a just society, and guide his community with wisdom and foresight.
+
+Students will delve into the deeper wisdom behind key events, battles, treaties, and community developments — understanding not just *what* happened, but *why* it happened and *how* it reflects prophetic methodology. The course aims to foster love, admiration, and practical inspiration from the prophetic legacy.
+
+Taught with due reverence and academic depth, the course encourages students to connect the Prophet’s ﷺ strategic approach to contemporary challenges, empowering them to apply prophetic insights in personal and societal contexts.
+`,
+      ur: `فقہ السیرۃ شیخ محمد الغزالی کی معروف تصنیف پر مبنی ایک علمی اور روحانی کورس ہے، جو نبی کریم ﷺ کی سیرت کو ایک منفرد زاویے سے سمجھنے کی کوشش کرتا ہے — ایسا زاویہ جو آپ ﷺ کی حکمت عملی، قیادت، اور صحابہ کرام رضی اللہ عنہم کی تربیت کو نمایاں کرتا ہے۔ یہ کورس روایتی ترتیب وار سیرت کی بجائے موضوعاتی اور تجزیاتی مطالعہ پیش کرتا ہے تاکہ اسلام کے قیام، ایک منصفانہ معاشرے کی تشکیل، اور امت کی رہنمائی کے مشن کو بہتر طور پر سمجھا جا سکے۔
+
+طلباء اہم واقعات، جنگوں، معاہدوں اور کمیونٹی کی ترقیات کے پیچھے حکمت کو سمجھیں گے — نہ صرف یہ کہ *کیا* ہوا، بلکہ یہ بھی کہ *کیوں* ہوا اور یہ نبی ﷺ کے طریقۂ کار کو کس طرح ظاہر کرتا ہے۔ کورس کا مقصد محبت، عقیدت اور نبی ﷺ کی تعلیمات سے عملی تحریک پیدا کرنا ہے۔
+
+احترام اور علمی گہرائی کے ساتھ پڑھایا جانے والا یہ کورس طلباء کو موجودہ دور کے چیلنجز میں نبی ﷺ کی حکمت عملی کو جوڑنے کی ترغیب دیتا ہے، تاکہ وہ اپنی ذاتی اور معاشرتی زندگی میں نبی ﷺ کے بصیرت انگیز اصولوں کو لاگو کر سکیں۔
+`,
+      ar: `فقه السيرة دورة علمية مستندة إلى كتاب الشيخ محمد الغزالي، تهدف إلى دراسة حياة النبي ﷺ من منظور فريد — يبرز استراتيجياته الإلهية، قيادته، ورعايته للصحابة الكرام رضي الله عنهم. بدلاً من السيرة الزمنية التقليدية، يقدم هذا الدورة دراسة موضوعية وتحليلية لمهمة النبي ﷺ في تأسيس الإسلام، بناء مجتمع عادل، وتوجيه أمته بالحكمة والبصيرة.
+
+سيغوص الطلاب في الحكمة العميقة وراء الأحداث المهمة، المعارك، المعاهدات، وتطور المجتمع — لفهم ليس فقط *ماذا* حدث، ولكن *لماذا* حدث و*كيف* يعكس منهجية النبي ﷺ. تهدف الدورة إلى تعزيز الحب والتقدير والإلهام العملي من إرث النبي ﷺ.
+
+تُدرس الدورة باحترام وعمق أكاديمي، وتشجع الطلاب على ربط النهج الاستراتيجي للنبي ﷺ بالتحديات المعاصرة، مما يمكنهم من تطبيق رؤى النبي ﷺ في السياقات الشخصية والمجتمعية.
+`
     },
     image: "/images/programs/seerah.png",
     duration: {

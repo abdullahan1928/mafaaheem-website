@@ -14,7 +14,7 @@ import {
 import Link from "next/link";
 import Image from "next/image";
 import { IEvent } from "@/models/Event";
-import { Plus, Calendar, Search } from "lucide-react";
+import { Plus, Search } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { ROUTES } from "@/routes";
 
@@ -135,7 +135,7 @@ export default function AdminEventsPage() {
                   />
 
                   <div className="flex justify-between">
-                    <Link href={ROUTES.DASHBOARD.EVENTS.VIEW(event._id)}>
+                    <Link href={ROUTES.DASHBOARD.EVENTS.EDIT(event._id)}>
                       <Button variant="outline" size="sm">
                         Edit
                       </Button>

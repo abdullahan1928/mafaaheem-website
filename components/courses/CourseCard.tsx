@@ -1,26 +1,20 @@
 import { Button } from "@/components/ui/button"
 import { Calendar, Clock, Users, ArrowRight, ArrowLeft } from "lucide-react"
-import { CategoryLabels, courseContent, type ICourse } from "@/data/course"
+import { CategoryLabels, courseContent } from "@/data/course"
 import { cn } from "@/lib/utils"
 import { useLanguage } from "@/contexts/LanguageContext"
 import Link from "next/link"
 import Image from "next/image"
 import { ROUTES } from "@/routes"
+import { ICourseDTO } from "@/models/Course"
 
-const CourseCard = ({
-  id,
-  title,
-  author,
-  description,
-  image,
-  duration,
-  startDate,
-  students,
-  category,
-  featured = false,
-}: ICourse) => {
+const CourseCard = (course: ICourseDTO) => {
   const { isRTL, language } = useLanguage()
   const content = courseContent[language]
+
+  const { slug, image, students, featured = false, translations } = course;
+
+  const { title, author, description, duration, startDateText: startDate } = translations;
 
   return (
     <div
@@ -42,7 +36,7 @@ const CourseCard = ({
         )}
         <div className={`absolute top-3 ${isRTL ? "right-3" : "left-3"} z-20`}>
           <span className="bg-white/90 backdrop-blur-sm text-mafaaheem-brown text-xs font-medium px-3 py-1 rounded-full shadow-md">
-            {CategoryLabels[category][language]}
+            {CategoryLabels[course.category as keyof typeof CategoryLabels]?.[language]}
           </span>
         </div>
 
@@ -81,10 +75,12 @@ const CourseCard = ({
             <Clock className="h-4 w-4 text-mafaaheem-gold group-hover/icon:scale-110 transition-transform" />
             <span>{duration[language]}</span>
           </div>
-          <div className="flex items-center gap-1 group/icon">
-            <Calendar className="h-4 w-4 text-mafaaheem-green group-hover/icon:scale-110 transition-transform" />
-            <span>{startDate[language]}</span>
-          </div>
+          {startDate &&
+            <div className="flex items-center gap-1 group/icon">
+              <Calendar className="h-4 w-4 text-mafaaheem-green group-hover/icon:scale-110 transition-transform" />
+              <span>{startDate[language]}</span>
+            </div>
+          }
           <div className="flex items-center gap-1 group/icon">
             <Users className="h-4 w-4 text-mafaaheem-brown group-hover/icon:scale-110 transition-transform" />
             <span>
@@ -101,7 +97,7 @@ const CourseCard = ({
 
         {/* Button */}
         <div className="flex justify-end mt-auto">
-          <Link href={ROUTES.PUBLIC.COURSES.VIEW(id)}>
+          <Link href={ROUTES.PUBLIC.COURSES.VIEW(slug)}>
             <Button size="sm" className="group/btn">
               {content.viewDetails}
 

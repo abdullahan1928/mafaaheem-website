@@ -43,12 +43,12 @@ import { NextResponse } from "next/server";
 
 export async function GET(
   request: Request,
-  { params }: { params: Promise<{ id: string; }> }
+  { params }: { params: Promise<{ slug: string; }> }
 ) {
   try {
     await connectDB();
-    const { id } = await params;
-    const blog = await Blog.findOne({ slug: id });
+    const { slug } = await params;
+    const blog = await Blog.findOne({ slug });
 
     if (!blog) {
       return NextResponse.json({ message: "Blog not found" }, { status: 404 });
@@ -65,15 +65,15 @@ export async function GET(
 
 export async function PUT(
   request: Request,
-  { params }: { params: Promise<{ id: string; }> }
+  { params }: { params: Promise<{ slug: string; }> }
 ) {
   try {
     await connectDB();
-    const { id } = await params;
+    const { slug } = await params;
     const data = await request.json();
 
     const updatedBlog = await Blog.findOneAndUpdate(
-      { slug: id },
+      { slug },
       data,
       { new: true }
     );
@@ -93,13 +93,13 @@ export async function PUT(
 
 export async function DELETE(
   request: Request,
-  { params }: { params: Promise<{ id: string }> }
+  { params }: { params: Promise<{ slug: string }> }
 ) {
   try {
     await connectDB();
-    const { id } = await params;
+    const { slug } = await params;
 
-    const deletedBlog = await Blog.findOneAndDelete({ slug: id });
+    const deletedBlog = await Blog.findOneAndDelete({ slug });
 
     if (!deletedBlog) {
       return NextResponse.json({ message: "Blog not found" }, { status: 404 });

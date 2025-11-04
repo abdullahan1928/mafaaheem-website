@@ -87,7 +87,9 @@ const CourseDetails = ({ course }: { course: ICourse }) => {
                 {students} {content.enrolledText}
               </span>
             </div>
-            <h1 className="text-4xl md:text-5xl font-bold text-white mb-3 leading-tight">{titleText}</h1>
+            <h1 className={`text-4xl md:text-5xl font-bold text-white mb-3 leading-tight ${language === "ur" ? "urdu-italic" : ""}`}>
+              {titleText}
+            </h1>
             <p className="text-white/85 max-w-3xl text-lg leading-relaxed">{descriptionText}</p>
           </div>
         </div>
@@ -105,7 +107,10 @@ const CourseDetails = ({ course }: { course: ICourse }) => {
                 </h2>
               </div>
               <div className="bg-gradient-to-br from-mafaaheem-beige/30 to-mafaaheem-gold/10 rounded-2xl p-8 border border-mafaaheem-gold/20 backdrop-blur-sm">
-                <p className="text-gray-700 leading-relaxed whitespace-pre-line text-lg">{longDescriptionText}</p>
+                <p
+                  className="prose w-full text-gray-700 leading-relaxed whitespace-pre-line text-lg max-w-full"
+                  dangerouslySetInnerHTML={{ __html: longDescriptionText }}
+                />
               </div>
             </section>
 

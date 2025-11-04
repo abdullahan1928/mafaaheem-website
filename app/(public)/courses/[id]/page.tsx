@@ -1,18 +1,33 @@
 import { cookies } from "next/headers"
 import Course from "./Course"
 import { Language } from "@/contexts/LanguageContext"
-import { COURSES } from "@/data/course"
 import { Metadata } from "next"
 
 export async function generateMetadata({ params }: { params: { id: string } }): Promise<Metadata> {
   const cookieStore = cookies()
-  const lang = ((await cookieStore).get("language")?.value || "en") as Language
-  const { id } = await params;
-  console.log("params.id", id)
+  const lang = (await cookieStore).get("language")?.value as Language || "en"
+  const { id } = await params
 
-  const course = COURSES.find((c) => c.id === id)
+  try {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/courses/${id}`, {
+      cache: "no-store",
+    })
 
-  if (!course) {
+    console.log("res", res)
+
+    if (!res.ok) throw new Error("Course not found")
+    const data = await res.json()
+
+    const translations = data.translations || {}
+    const localizedTitle = translations.title?.[lang] || translations.title?.en || "Course"
+    const localizedDescription = translations.description?.[lang] || translations.description?.en || ""
+
+    return {
+      title: localizedTitle,
+      description: localizedDescription,
+    }
+  } catch (error) {
+    console.error(error)
     const notFoundMeta = {
       en: {
         title: "Course Not Found",
@@ -29,17 +44,6 @@ export async function generateMetadata({ params }: { params: { id: string } }): 
     }
 
     return notFoundMeta[lang] || notFoundMeta.en
-  }
-
-  const localizedTitle =
-    course.title?.[lang] || course.title?.en
-  const localizedDescription =
-    course.description?.[lang] ||
-    course.description?.en
-
-  return {
-    title: `${localizedTitle}`,
-    description: `${localizedDescription}`,
   }
 }
 

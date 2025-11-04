@@ -4,7 +4,7 @@ import { useEffect, useState } from "react"
 import CourseDetails from "@/components/courses/CourseDetails"
 import { Button } from "@/components/ui/button"
 import { ArrowLeft, ArrowRight, BookOpen } from "lucide-react"
-import { courseContent, COURSES, type ICourse } from "@/data/course"
+import { Category, courseContent, COURSES, type ICourse } from "@/data/course"
 import { useLanguage } from "@/contexts/LanguageContext"
 import { useParams, useRouter } from "next/navigation"
 import { ROUTES } from "@/routes"
@@ -20,15 +20,51 @@ const Course = () => {
   const content = courseContent[language]
 
   useEffect(() => {
-    const foundCourse = COURSES.find((c) => c.id === courseId)
+    async function fetchCourse() {
+      try {
+        const res = await fetch(`/api/courses/${courseId}`);
+        if (!res.ok) throw new Error("Failed to fetch course");
+        const data = await res.json();
 
-    if (foundCourse) {
-      setCourse(foundCourse)
-      // eslint-disable-next-line react-hooks/exhaustive-deps
+        const { slug: s, image, students, category, featured, enrollmentUrl, translations, instructors, modules } = data;
+
+        setCourse({
+          id: s,
+          image: image || "",
+          students: students || 0,
+          category: category || Category.Other,
+          featured: featured || false,
+          enrollmentUrl: enrollmentUrl || "",
+          title: translations?.title || { en: "", ur: "", ar: "" },
+          author: translations?.author || { en: "", ur: "", ar: "" },
+          description: translations?.description || { en: "", ur: "", ar: "" },
+          longDescription:
+            translations?.longDescription || { en: "", ur: "", ar: "" },
+          duration: translations?.duration || { en: "", ur: "", ar: "" },
+          schedule: translations?.schedule || { en: "", ur: "", ar: "" },
+          startDate: translations?.startDate || { en: "", ur: "", ar: "" },
+          features: translations?.features || {
+            en: [],
+            ur: [],
+            ar: [],
+          },
+          objectives: translations?.objectives || {
+            en: [],
+            ur: [],
+            ar: [],
+          },
+          instructors: instructors || [],
+          modules: modules || [],
+        });
+
+        setLoading(false)
+      } catch (error) {
+        console.error(error);
+      }
     }
 
-    setLoading(false)
-  }, [courseId])
+    if (courseId) fetchCourse();
+  }, [courseId]);
 
   if (loading) {
     return (
