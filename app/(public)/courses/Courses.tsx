@@ -9,8 +9,12 @@ import { useLanguage } from "@/contexts/LanguageContext"
 import { coursesContent } from "@/data/courses"
 import { ICourse, ICourseDTO } from "@/models/Course"
 
-const Courses = () => {
-  const [courses, setCourses] = useState<ICourseDTO[]>([])
+interface CoursesProps {
+  initialCourses: ICourseDTO[]
+}
+
+const Courses = ({ initialCourses }: CoursesProps) => {
+  const [courses, setCourses] = useState<ICourseDTO[]>(initialCourses)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
   const [searchTerm, setSearchTerm] = useState("")

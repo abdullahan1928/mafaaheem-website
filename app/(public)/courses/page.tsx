@@ -1,6 +1,7 @@
 import { cookies } from "next/headers"
 import Courses from "./Courses"
 import { Language } from "@/contexts/LanguageContext"
+import { ICourseDTO } from "@/models/Course"
 
 export async function generateMetadata() {
   const cookieStore = cookies()
@@ -41,8 +42,19 @@ export async function generateMetadata() {
   }
 }
 
-const CoursesPage = () => {
-  return <Courses />
+const CoursesPage = async () => {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/courses?limit=6`, {
+    cache: "no-store",
+  })
+
+  if (!res.ok) {
+    throw new Error("Failed to load courses")
+  }
+
+  const data = await res.json()
+  const initialCourses = data.data as ICourseDTO[];
+
+  return <Courses initialCourses={initialCourses} />
 }
 
 export default CoursesPage
