@@ -65,7 +65,7 @@ export const ROUTES = {
     }),
     COURSES: withPrefix("courses", {
       LIST: "",
-      EDIT: (id: string) => `${id}`,
+      EDIT: (slug: string) => `${slug}`,
       NEW: "new",
     }),
   }),
