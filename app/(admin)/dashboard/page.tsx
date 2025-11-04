@@ -25,6 +25,8 @@ const DashboardPage = () => {
   })
   const [loading, setLoading] = useState(true)
 
+  console.log("data", data)
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -104,16 +106,16 @@ const DashboardPage = () => {
           </CardHeader>
           <CardContent>
             <ul className="space-y-3">
-              {data.events.slice(0, 5).map((event: any) => (
+              {data.events.slice(0, 5).map(event => (
                 <li
                   key={event.id}
                   className="p-3 rounded-lg border flex justify-between items-center hover:bg-muted/40 transition"
                 >
                   <div>
-                    <p className="font-medium">{event.title?.en}</p>
+                    <p className="font-medium">{event.title}</p>
                     <p className="text-sm text-muted-foreground">{event.date}</p>
                   </div>
-                  <Link href={`/dashboard/events/${event.id}`} className="text-sm text-blue-600 hover:underline">
+                  <Link href={ROUTES.DASHBOARD.EVENTS.EDIT(event._id)} className="text-sm text-blue-600 hover:underline">
                     View
                   </Link>
                 </li>
