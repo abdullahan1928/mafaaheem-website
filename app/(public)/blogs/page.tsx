@@ -9,6 +9,7 @@ import { Input } from "@/components/ui/input";
 import { useLanguage } from "@/contexts/LanguageContext";
 import type { IBlog } from "@/models/Blog";
 import { blogsContent } from "@/data/blogs";
+import { formatDateWithLanguage } from "@/lib/date";
 
 export default function BlogsPage() {
   const { language, isRTL } = useLanguage();
@@ -147,7 +148,7 @@ export default function BlogsPage() {
               <div className={`p-5 flex flex-col flex-1 ${blog.language === "ar" || blog.language === "ur" ? "text-right" : "text-left"}`}>
                 <div className="flex items-center gap-2 text-sm text-muted-foreground mb-2">
                   <CalendarDays className="w-4 h-4" />
-                  <time aria-label={content.dateAria}>{formatDate(blog.createdAt)}</time>
+                  <time aria-label={content.dateAria}>{formatDateWithLanguage(blog.createdAt, blog.language)}</time>
                 </div>
 
                 <h3
@@ -175,21 +176,6 @@ export default function BlogsPage() {
       )}
     </div>
   );
-}
-
-// Helpers
-function formatDate(date?: string | Date) {
-  if (!date) return "";
-  try {
-    const d = date instanceof Date ? date : new Date(date);
-    return d.toLocaleDateString(undefined, {
-      year: "numeric",
-      month: "short",
-      day: "numeric",
-    });
-  } catch {
-    return String(date);
-  }
 }
 
 function stripHtml(html = "") {

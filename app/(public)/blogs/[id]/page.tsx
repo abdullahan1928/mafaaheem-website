@@ -4,12 +4,13 @@ import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowLeft, ArrowRight } from "lucide-react"; 
+import { ArrowLeft, ArrowRight } from "lucide-react";
 import { IBlog } from "@/models/Blog";
 import { ROUTES } from "@/routes";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { blogsContent } from "@/data/blogs";
 import { cn } from "@/lib/utils";
+import { formatDateWithLanguage } from "@/lib/date";
 
 export default function BlogDetailPage() {
   const { language } = useLanguage();
@@ -82,11 +83,7 @@ export default function BlogDetailPage() {
           dangerouslySetInnerHTML={{ __html: blog.title }}
         />
         <p className="text-sm text-muted-foreground">
-          {new Date(blog.createdAt).toLocaleDateString("en-US", {
-            year: "numeric",
-            month: "long",
-            day: "numeric",
-          })}
+          {formatDateWithLanguage(blog.createdAt)}
         </p>
       </div>
 

@@ -9,16 +9,8 @@ import { ROUTES } from "@/routes";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { eventsContent } from "@/data/events";
 import { cn } from "@/lib/utils";
-
-interface IEvent {
-  _id: string;
-  title: string;
-  description: string;
-  image?: string;
-  date?: string;
-  language: string;
-  createdAt?: string;
-}
+import { IEvent } from "@/models/Event";
+import { formatDateWithLanguage } from "@/lib/date";
 
 export default function EventDetailsPage() {
   const { language } = useLanguage();
@@ -93,11 +85,7 @@ export default function EventDetailsPage() {
         />
         {event.date && (
           <p className="text-sm text-muted-foreground">
-            {new Date(event.date).toLocaleDateString("en-US", {
-              year: "numeric",
-              month: "long",
-              day: "numeric",
-            })}
+            {formatDateWithLanguage(event.date)}
           </p>
         )}
       </div>

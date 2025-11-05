@@ -9,15 +9,8 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { eventsContent } from "@/data/events";
 import { ROUTES } from "@/routes";
 import { cn } from "@/lib/utils";
-
-interface IEvent {
-  _id: string;
-  title: string;
-  description: string;
-  image?: string;
-  date?: string;
-  language: string;
-}
+import { formatDateWithLanguage } from "@/lib/date";
+import { IEvent } from "@/models/Event";
 
 export default function EventsPage() {
   const { language } = useLanguage();
@@ -98,11 +91,7 @@ export default function EventsPage() {
               )}>
                 {event.date && (
                   <p className="text-sm text-mafaaheem-gold mb-2">
-                    {new Date(event.date).toLocaleDateString(language, {
-                      year: "numeric",
-                      month: "long",
-                      day: "numeric",
-                    })}
+                    {formatDateWithLanguage(event.date, event.language)}
                   </p>
                 )}
                 <h3
