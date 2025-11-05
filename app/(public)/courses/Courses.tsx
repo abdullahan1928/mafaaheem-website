@@ -7,7 +7,7 @@ import { BookOpen, Filter, Search, Sparkles } from "lucide-react"
 import { CategoryLabels } from "@/data/course"
 import { useLanguage } from "@/contexts/LanguageContext"
 import { coursesContent } from "@/data/courses"
-import { ICourse, ICourseDTO } from "@/models/Course"
+import { ICourseDTO } from "@/models/Course"
 
 interface CoursesProps {
   initialCourses: ICourseDTO[]
@@ -15,7 +15,7 @@ interface CoursesProps {
 
 const Courses = ({ initialCourses }: CoursesProps) => {
   const [courses, setCourses] = useState<ICourseDTO[]>(initialCourses)
-  const [loading, setLoading] = useState(true)
+  const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const [searchTerm, setSearchTerm] = useState("")
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null)
@@ -33,7 +33,7 @@ const Courses = ({ initialCourses }: CoursesProps) => {
   useEffect(() => {
     const fetchCourses = async () => {
       try {
-        setLoading(true)
+        // setLoading(true)
         const res = await fetch("/api/courses")
         if (!res.ok) throw new Error("Failed to fetch courses")
         const data = await res.json()
@@ -44,7 +44,7 @@ const Courses = ({ initialCourses }: CoursesProps) => {
         setLoading(false)
       }
     }
-    fetchCourses()
+    // fetchCourses()
   }, [])
 
   const categories = [

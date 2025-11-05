@@ -3,6 +3,8 @@ import Courses from "./Courses"
 import { Language } from "@/contexts/LanguageContext"
 import { ICourseDTO } from "@/models/Course"
 
+export const revalidate = 60
+
 export async function generateMetadata() {
   const cookieStore = cookies()
   const lang = (await cookieStore).get("language")?.value || "en"
@@ -44,7 +46,7 @@ export async function generateMetadata() {
 
 const CoursesPage = async () => {
   const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/courses?limit=6`, {
-    cache: "no-store",
+    next: { revalidate: 60 },
   })
 
   if (!res.ok) {
