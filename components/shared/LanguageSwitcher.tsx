@@ -49,7 +49,7 @@ export function LanguageSwitcher() {
         className="flex items-center gap-2 hover:bg-mafaaheem-gold/80"
       >
         <Globe className="h-4 w-4" />
-        <span className="text-sm font-medium">{language.toUpperCase()}</span>
+        <span className={`font-medium ${language === "ur" ? "text-xs" : "text-sm"}`}>{language.toUpperCase()}</span>
       </Button>
 
       {/* Desktop Dropdown */}

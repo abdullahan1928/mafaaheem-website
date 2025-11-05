@@ -7,6 +7,7 @@ import Image from "next/image"
 import { ROUTES } from "@/routes"
 import { useRouter } from "next/navigation"
 import { heroContent } from "@/data/hero"
+import { cn } from "@/lib/utils"
 
 const HeroSection = () => {
   const router = useRouter()
@@ -22,7 +23,7 @@ const HeroSection = () => {
 
   return (
     <section
-      className="relative min-h-screen flex items-center overflow-hidden pt-16"
+      className="relative min-h-screen flex items-center overflow-hidden sm:pt-16"
       aria-label="Hero section - Mafaaheem Institute"
     >
       <div className="absolute inset-0 z-0">
@@ -40,15 +41,21 @@ const HeroSection = () => {
       <div className="container mx-auto px-4 md:px-6 relative z-10">
         <div className="max-w-5xl mx-auto">
           <div className="space-y-8">
-            <div className="space-y-4">
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-mafaaheem-gold/10 border border-mafaaheem-gold/30 mb-4">
+            <div className={cn(
+              "space-y-4",
+              isRTL ? "sm:text-right" : "text-center sm:text-left"
+            )}>
+              <div className="inline-flex mx-auto gap-2 px-4 py-2 rounded-full bg-mafaaheem-gold/10 border border-mafaaheem-gold/30 mb-4 items-center">
                 <Sparkles className="h-4 w-4 text-mafaaheem-gold" />
                 <span className="text-sm font-semibold text-mafaaheem-brown">
                   {content.welcome}
                 </span>
               </div>
 
-              <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-mafaaheem-brown leading-tight sm:leading-snug animate-fade-down text-balance">
+              <h1 className={cn(
+                "sm:text-5xl md:text-6xl lg:text-7xl font-bold text-mafaaheem-brown leading-tight sm:leading-snug animate-fade-down text-balance",
+                isRTL ? "text-5xl text-right" : "text-4xl text-center sm:text-left"
+              )}>
                 {content.title}
               </h1>
 
@@ -87,17 +94,19 @@ const HeroSection = () => {
         </div>
       </div>
 
+      {/* Scroll Down Indicator */}
       <div
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce cursor-pointer group"
+        className="absolute bottom-4 sm:bottom-8 inset-x-0 flex justify-center animate-bounce cursor-pointer group"
         onClick={scrollToNextSection}
       >
-        <div className="flex flex-col items-center gap-2">
-          <span className="text-xs font-semibold text-mafaaheem-brown/60 group-hover:text-mafaaheem-brown transition-colors">
+        <div className="flex flex-col items-center gap-1 sm:gap-2">
+          <span className="text-sm sm:text-xs font-semibold text-mafaaheem-brown/60 group-hover:text-mafaaheem-brown transition-colors">
             {content.scroll}
           </span>
           <ChevronDown className="h-6 w-6 text-mafaaheem-brown opacity-60 group-hover:opacity-100 transition-opacity" />
         </div>
       </div>
+
     </section>
   )
 }

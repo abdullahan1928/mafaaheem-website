@@ -182,6 +182,7 @@
   direction: rtl;
 }
 
+/* Urdu Typography Scaling for Tailwind Text Sizes */
 .urdu .text-xs {
   font-size: 0.9rem !important;
   line-height: 1.7rem !important;
@@ -197,6 +198,11 @@
   line-height: 2.1rem !important;
 }
 
+.urdu .text-lg {
+  font-size: 1.5rem !important;
+  line-height: 2.3rem !important;
+}
+
 .decoration {
   display: inline-flex;
   flex-direction: column;
@@ -209,6 +215,8 @@
   transform: rotate(45deg);
   background: linear-gradient(135deg, #D4AF37, #F6E27F);
   border-radius: 2px;
+  width: 12px;
+  height: 12px;
 }
 
 .decoration::after {
@@ -225,11 +233,6 @@
   .decoration {
     flex-direction: row;
     gap: 0;
-  }
-
-  .decoration::before {
-    width: 12px;
-    height: 12px;
   }
 
   .decoration::after {
