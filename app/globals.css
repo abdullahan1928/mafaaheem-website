@@ -3,11 +3,19 @@
 @import url('https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Scheherazade+New:wght@400;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@400;700&display=swap');
-@import url('https://cdn.jsdelivr.net/gh/urduweb/font-jameel-noori-nastaleeq/font.css');
+/* @import url('https://cdn.jsdelivr.net/gh/urduweb/font-jameel-noori-nastaleeq/font.css'); */
 
 @font-face {
   font-family: 'Jameel Noori Nastaleeq Kasheeda';
   src: url('/fonts/JameelNooriNastaliqKasheeda3.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Jameel Noori Nastaleeq';
+  src: url('/fonts/Jameel Noori Nastaleeq Regular.ttf') format('woff2');
   font-weight: normal;
   font-style: normal;
   font-display: swap;
