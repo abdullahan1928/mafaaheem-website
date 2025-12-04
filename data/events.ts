@@ -7,6 +7,7 @@ export const eventsContent = {
     backToEvents: "Back to Events",
     loadingSingle: "Loading event...",
     eventNotFound: "Event not found",
+    noEventsFound: "No events found.",
   },
   ur: {
     heading: "تقریبات اور اجتماعات",
@@ -16,6 +17,7 @@ export const eventsContent = {
     backToEvents: "واپس تقریبات کی طرف",
     loadingSingle: "تقریب لوڈ ہو رہی ہے...",
     eventNotFound: "کوئی تقریب نہیں ملی",
+    noEventsFound: "کوئی تقریبات نہیں ملیں۔",
   },
   ar: {
     heading: "الفعاليات والتجمعات",
@@ -25,6 +27,7 @@ export const eventsContent = {
     backToEvents: "العودة إلى الفعاليات",
     loadingSingle: "يتم تحميل الفعالية...",
     eventNotFound: "لم يتم العثور على الفعالية",
+    noEventsFound: "لم يتم العثور على فعاليات.",
   },
 }
 

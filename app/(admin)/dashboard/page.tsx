@@ -2,27 +2,24 @@
 
 import React, { useEffect, useState } from "react"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Loader2, Calendar, Book, FileText } from "lucide-react"
+import { Loader2, Calendar, Book, FileText, ArrowRight } from "lucide-react"
 import Link from "next/link"
+import Image from "next/image"
 import { IEvent } from "@/models/Event"
 import { IBlog } from "@/models/Blog"
 import { ICourseDTO } from "@/models/Course"
 import { ROUTES } from "@/routes"
 import { Button } from "@/components/ui/button"
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
+import { formatDateWithLanguage } from "@/lib/date"
 
 interface IData {
   events: IEvent[]
-  courses: { data: ICourseDTO[] }
+  courses: ICourseDTO[]
   blogs: IBlog[]
 }
 
 const DashboardPage = () => {
-  const [data, setData] = useState<IData>({
-    events: [],
-    courses: { data: [] },
-    blogs: [],
-  })
+  const [data, setData] = useState<IData>({ events: [], courses: [], blogs: [] })
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
@@ -50,71 +47,68 @@ const DashboardPage = () => {
 
   if (loading) {
     return (
-      <div className="flex items-center justify-center h-screen">
+      <div className="flex items-center justify-center h-screen bg-gray-50">
         <Loader2 className="w-10 h-10 animate-spin text-muted-foreground" />
       </div>
     )
   }
 
   return (
-    <div className="p-8 space-y-8 bg-gray-50 min-h-screen">
-      {/* Header */}
-      <div className="flex justify-between items-center">
-        <h1 className="text-3xl font-bold tracking-tight">Dashboard</h1>
+    <div className="space-y-10 bg-gray-50 min-h-screen">
+      {/* Dashboard Header */}
+      <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-3">
+        <h1 className="text-4xl font-extrabold tracking-tight text-mafaaheem-brown">
+          Dashboard
+        </h1>
       </div>
 
       {/* Summary Cards */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <SummaryCard title="Events" value={data.events.length} icon={<Calendar className="w-6 h-6 text-mafaaheem-brown" />} />
-        <SummaryCard title="Courses" value={data.courses.data.length} icon={<Book className="w-6 h-6 text-mafaaheem-green" />} />
-        <SummaryCard title="Blogs" value={data.blogs.length} icon={<FileText className="w-6 h-6 text-mafaaheem-gold" />} />
-      </div>
-
-      {/* Tables Section */}
-      <div className="grid grid-cols-1 gap-6">
-        <RecentTable
-          title="Recent Courses"
-          headers={["Title", "Author", "Category"]}
-          rows={data.courses.data.slice(0, 5).map(course => ({
-            id: course.id,
-            title: course.translations.title.en,
-            author: course.translations.author?.en || "-",
-            category: course.category || "-",
-            link: ROUTES.DASHBOARD.COURSES.EDIT(course.slug),
-          }))}
-          viewAllLink={ROUTES.DASHBOARD.COURSES.LIST}
+        <SummaryCard
+          title="Events"
+          value={data.events.length}
+          icon={<Calendar className="w-6 h-6 text-mafaaheem-brown" />}
         />
-
-        <RecentTable
-          title="Recent Events"
-          headers={["Title", "Date", "Language"]}
-          rows={data.events.slice(0, 5).map(event => ({
-            id: event._id,
-            title: event.title,
-            date: event.date,
-            language: event.language,
-            link: ROUTES.DASHBOARD.EVENTS.EDIT(event._id),
-          }))}
-          viewAllLink={ROUTES.DASHBOARD.EVENTS.LIST}
+        <SummaryCard
+          title="Courses"
+          value={data.courses.length}
+          icon={<Book className="w-6 h-6 text-mafaaheem-green" />}
         />
-
-        <RecentTable
-          title="Recent Blogs"
-          headers={["Title", "Language", "Published"]}
-          rows={data.blogs.slice(0, 5).map(blog => ({
-            id: blog._id,
-            title: blog.title,
-            language: blog.language,
-            published: blog.published ? "Yes" : "No",
-            link: ROUTES.DASHBOARD.BLOGS.EDIT(blog.slug),
-          }))}
-          viewAllLink={ROUTES.DASHBOARD.BLOGS.LIST}
+        <SummaryCard
+          title="Blogs"
+          value={data.blogs.length}
+          icon={<FileText className="w-6 h-6 text-mafaaheem-gold" />}
         />
       </div>
+
+      {/* Recent Events */}
+      <RecentSection
+        title="Recent Events"
+        items={data.events.slice(0, 4)}
+        type="event"
+        viewAllLink={ROUTES.DASHBOARD.EVENTS.LIST}
+      />
+
+      {/* Recent Courses */}
+      <RecentSection
+        title="Recent Courses"
+        items={data.courses.slice(0, 4)}
+        type="course"
+        viewAllLink={ROUTES.DASHBOARD.COURSES.LIST}
+      />
+
+      {/* Recent Blogs */}
+      <RecentSection
+        title="Recent Blogs"
+        items={data.blogs.slice(0, 4)}
+        type="blog"
+        viewAllLink={ROUTES.DASHBOARD.BLOGS.LIST}
+      />
     </div>
   )
 }
 
+// ---------- Summary Card ----------
 const SummaryCard = ({ title, value, icon }: { title: string; value: number; icon: React.ReactNode }) => (
   <Card className="shadow-sm border bg-white">
     <CardHeader className="flex flex-row items-center justify-between pb-2">
@@ -128,83 +122,106 @@ const SummaryCard = ({ title, value, icon }: { title: string; value: number; ico
   </Card>
 )
 
-const RecentTable = ({
+// ---------- Recent Section (Cards) ----------
+const RecentSection = ({
   title,
-  headers,
-  rows,
+  items,
+  type,
   viewAllLink,
 }: {
   title: string
-  headers: string[]
-  rows: any[]
+  items: any[]
+  type: "event" | "course" | "blog"
   viewAllLink: string
-}) => (
-  <Card className="border shadow-sm bg-white border-mafaaheem-beige">
-    <CardHeader className="border-b">
-      <CardTitle className="text-lg font-semibold text-gray-800">
-        {title}
-      </CardTitle>
-    </CardHeader>
-    <CardContent className="p-0">
-      <div className="overflow-x-auto">
-        <Table>
-          <TableHeader>
-            <TableRow>
-              {headers.map((header, idx) => (
-                <TableHead key={idx}>
-                  {header}
-                </TableHead>
-              ))}
-              <TableHead className="text-right"></TableHead>
-            </TableRow>
-          </TableHeader>
-          <TableBody>
-            {rows.length > 0 ? (
-              rows.map((row, idx) => (
-                <TableRow key={row.id || idx}>
-                  {Object.keys(row)
-                    .filter((key) => key !== "id" && key !== "link")
-                    .map((key, i) => (
-                      <TableCell key={i}>
-                        {row[key]}
-                      </TableCell>
-                    ))}
-                  <TableCell className="text-right">
-                    <Link
-                      href={row.link}
-                      className="text-mafaaheem-green text-sm font-medium hover:underline"
-                    >
-                      View
-                    </Link>
-                  </TableCell>
-                </TableRow>
-              ))
-            ) : (
-              <TableRow>
-                <TableCell
-                  colSpan={headers.length + 1}
-                  className="text-center text-muted-foreground py-6"
-                >
-                  No records found
-                </TableCell>
-              </TableRow>
-            )}
-          </TableBody>
-        </Table>
-      </div>
-      <div className="flex justify-end p-4 border-t">
+}) => {
+  return (
+    <div className="space-y-4">
+      <div className="flex justify-between items-center">
+        <h2 className="text-xl font-semibold text-gray-800">{title}</h2>
         <Link href={viewAllLink}>
-          <Button
-            variant="outline"
-            size="sm"
-            className="bg-mafaaheem-brown hover:bg-mafaaheem-gold text-white"
-          >
-            View All
+          <Button size="sm" className="flex items-center gap-2">
+            View All <ArrowRight className="w-4 h-4" />
           </Button>
         </Link>
       </div>
-    </CardContent>
-  </Card>
-)
+
+      {items.length > 0 ? (
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          {items.map((item: any) => {
+            let titleText = ""
+            let imageUrl = ""
+            let linkUrl = ""
+
+            switch (type) {
+              case "event":
+                titleText = item.title
+                imageUrl = item.image || ""
+                linkUrl = ROUTES.DASHBOARD.EVENTS.EDIT(item._id)
+                break
+              case "course":
+                titleText = item.translations.title.en
+                imageUrl = item.image || ""
+                linkUrl = ROUTES.DASHBOARD.COURSES.EDIT(item.slug)
+                break
+              case "blog":
+                titleText = item.title
+                imageUrl = item.image || ""
+                linkUrl = ROUTES.DASHBOARD.BLOGS.EDIT(item.slug)
+                break
+            }
+
+            return (
+              <Card
+                key={item._id || item.id}
+                className="overflow-hidden hover:shadow-lg transition-all flex flex-col"
+              >
+                {imageUrl && (
+                  <div className="relative h-40 w-full overflow-hidden">
+                    <Image
+                      src={imageUrl}
+                      alt={titleText}
+                      fill
+                      className="object-cover transition-transform duration-300 hover:scale-105"
+                    />
+                  </div>
+                )}
+                <CardHeader>
+                  <CardTitle
+                    className="text-lg font-medium line-clamp-2"
+                    dangerouslySetInnerHTML={{ __html: titleText }}
+                  />
+                </CardHeader>
+                <CardContent className="flex flex-col gap-2 mt-auto">
+                  {type === "event" && (
+                    <p className="text-xs text-muted-foreground">
+                      {formatDateWithLanguage(item.date, item.language)}
+                    </p>
+                  )}
+                  {type === "course" && (
+                    <p className="text-xs text-muted-foreground">
+                      Author: {item.translations.author?.en || "-"}
+                    </p>
+                  )}
+                  {type === "blog" && (
+                    <p className="text-xs text-muted-foreground">
+                      Published: {item.published ? "Yes" : "No"}
+                    </p>
+                  )}
+                  <Link href={linkUrl}>
+                    <Button variant="outline" size="sm">
+                      Edit
+                    </Button>
+                  </Link>
+                </CardContent>
+              </Card>
+            )
+          })}
+        </div>
+      ) : (
+        <p className="text-center text-gray-400 py-10">No recent {title.toLowerCase()} found.</p>
+      )}
+    </div>
+  )
+}
 
 export default DashboardPage

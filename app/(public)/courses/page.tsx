@@ -45,7 +45,7 @@ export async function generateMetadata() {
 }
 
 const CoursesPage = async () => {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/courses?limit=6`, {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/courses`, {
     next: { revalidate: 60 },
   })
 
@@ -54,7 +54,8 @@ const CoursesPage = async () => {
   }
 
   const data = await res.json()
-  const initialCourses = data.data as ICourseDTO[];
+  console.log('Courses fetch status:', res.status, 'Data length:', data.length, data);
+  const initialCourses: ICourseDTO[] = data;
 
   return <Courses initialCourses={initialCourses} />
 }

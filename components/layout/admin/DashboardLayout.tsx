@@ -29,7 +29,7 @@ export function AdminDashboardLayout({ children }: DashboardLayoutProps) {
         <DashboardHeader />
 
         {/* Page Content */}
-        <div className="flex-1 p-6">{children}</div>
+        <div className="flex-1 px-10 py-6">{children}</div>
       </main>
     </SidebarProvider>
   );

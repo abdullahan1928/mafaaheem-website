@@ -17,15 +17,27 @@ import { ROUTES } from "@/routes";
 import { Plus, Search, Filter } from "lucide-react";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
+import { DashboardPagination } from "@/components/dashboard/dashboard-pagination";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogFooter,
+} from "@/components/ui/dialog";
 
 export default function AdminBlogsPage() {
   const [blogs, setBlogs] = useState<IBlog[]>([]);
   const [search, setSearch] = useState("");
   const [statusFilter, setStatusFilter] = useState<"all" | "published" | "draft">("all");
-  const [currentPage, setCurrentPage] = useState(1);
+  const [deleteBlog, setDeleteBlog] = useState<IBlog | null>(null);
+  const [deleting, setDeleting] = useState(false);
 
-  const blogsPerPage = 6;
+  const [page, setPage] = useState(1);
+  const [limit] = useState(6);
 
+  // Fetch blogs
   useEffect(() => {
     const fetchBlogs = async () => {
       try {
@@ -39,6 +51,12 @@ export default function AdminBlogsPage() {
     fetchBlogs();
   }, []);
 
+  // Reset page when search or filter changes
+  useEffect(() => {
+    setPage(1);
+  }, [search, statusFilter]);
+
+  // Filter blogs
   const filteredBlogs = useMemo(() => {
     return blogs.filter((blog) => {
       const matchesSearch = blog.title.toLowerCase().includes(search.toLowerCase());
@@ -52,39 +70,44 @@ export default function AdminBlogsPage() {
     });
   }, [blogs, search, statusFilter]);
 
-  const totalPages = Math.ceil(filteredBlogs.length / blogsPerPage);
-  const paginatedBlogs = filteredBlogs.slice(
-    (currentPage - 1) * blogsPerPage,
-    currentPage * blogsPerPage
-  );
+  // Paginate filtered blogs
+  const paginatedBlogs = useMemo(() => {
+    const start = (page - 1) * limit;
+    return filteredBlogs.slice(start, start + limit);
+  }, [filteredBlogs, page, limit]);
 
-  const handlePrev = () => setCurrentPage((prev) => Math.max(prev - 1, 1));
-  const handleNext = () => setCurrentPage((prev) => Math.min(prev + 1, totalPages));
+  // Delete blog
+  const confirmDelete = async () => {
+    if (!deleteBlog) return;
+    setDeleting(true);
+    try {
+      await fetch(`/api/blogs/${deleteBlog.slug}`, { method: "DELETE" });
+      setBlogs((prev) => prev.filter((b) => b.slug !== deleteBlog.slug));
+      setDeleteBlog(null);
+    } finally {
+      setDeleting(false);
+    }
+  };
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-10">
       {/* Header */}
-      <div className="sticky top-0 z-10 bg-background/80 backdrop-blur-md border-b pb-4">
+      <div className="space-y-4">
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
-          <div>
-            <h1 className="text-3xl font-bold tracking-tight">Manage Blogs</h1>
-            <p className="text-sm text-muted-foreground">
-              View, edit, and publish your blog posts.
-            </p>
-          </div>
+          <h1 className="text-3xl font-bold text-mafaaheem-brown">Blogs</h1>
           <Link href={ROUTES.DASHBOARD.BLOGS.NEW}>
-            <Button size="sm" className="flex items-center gap-2">
-              <Plus className="w-4 h-4" /> Add New Blog
+            <Button className="flex items-center gap-2">
+              <Plus className="w-4 h-4" /> Add Blog
             </Button>
           </Link>
         </div>
 
         {/* Filters */}
-        <div className="mt-4 flex flex-col sm:flex-row gap-3">
+        <div className="flex flex-col sm:flex-row gap-3">
           <div className="relative flex-1">
             <Search className="absolute left-3 top-2.5 h-4 w-4 text-muted-foreground" />
             <Input
-              placeholder="Search by title..."
+              placeholder="Search blogs..."
               className="pl-9"
               value={search}
               onChange={(e) => setSearch(e.target.value)}
@@ -112,41 +135,43 @@ export default function AdminBlogsPage() {
 
       {/* Blog Grid */}
       {paginatedBlogs.length > 0 ? (
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+        <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3">
           {paginatedBlogs.map((blog) => {
-            const isRTL = blog.language === 'ur' || blog.language === 'ar';
+            const isRTL = blog.language === "ur" || blog.language === "ar";
 
             return (
               <Card
                 key={blog._id}
-                className={`overflow-hidden border border-border/60 hover:shadow-md transition-all duration-200 ${isRTL && "text-right"}`}
+                className="overflow-hidden hover:shadow-lg transition-all flex flex-col"
+                dir={isRTL ? "rtl" : "ltr"}
               >
-                {/* Image */}
                 {blog.image && (
-                  <div className="relative h-40 overflow-hidden">
+                  <div className="relative h-44 w-full overflow-hidden">
                     <Image
                       src={blog.image}
                       alt={blog.title}
-                      width={100}
-                      height={100}
-                      className="object-cover w-full h-full transition-transform duration-300 hover:scale-105"
+                      fill
+                      className="object-cover transition-transform duration-300 hover:scale-105"
                     />
                   </div>
                 )}
-                <CardHeader>
+
+                <CardHeader className={cn(isRTL && "text-right")}>
                   <CardTitle
                     className={cn(
-                      "prose text-lg line-clamp-2 urdu-italic",
+                      "prose text-lg line-clamp-2 urdu-italic text-mafaaheem-brown",
                       blog.language === "ur" ? "urdu" : "",
                       blog.language === "ar" ? "arabic" : ""
                     )}
                     dangerouslySetInnerHTML={{ __html: blog.title }}
                   />
                 </CardHeader>
-                <CardContent>
-                  <p className="text-xs text-muted-foreground mb-2">
+
+                <CardContent className="flex flex-col justify-between flex-1 space-y-4">
+                  <p className="text-xs text-mafaaheem-gold">
                     {new Date(blog.createdAt).toLocaleDateString()}
                   </p>
+
                   <p
                     className={cn(
                       "prose text-sm text-muted-foreground line-clamp-3 mb-4",
@@ -155,69 +180,61 @@ export default function AdminBlogsPage() {
                     )}
                     dangerouslySetInnerHTML={{ __html: blog.content }}
                   />
-                  <div className="flex justify-between items-center">
+
+                  <div className="flex justify-between border-t pt-4 mt-auto">
                     <Link href={ROUTES.DASHBOARD.BLOGS.EDIT(blog.slug)}>
-                      <Button variant="outline" size="sm">
-                        Edit
-                      </Button>
+                      <Button variant="outline" size="sm">Edit</Button>
                     </Link>
+
                     <Button
+                      variant="destructive"
                       size="sm"
-                      variant={blog.published ? "default" : "secondary"}
-                      className={cn(
-                        "capitalize px-3",
-                        blog.published
-                          ? "bg-emerald-500/90 hover:bg-emerald-500"
-                          : "bg-muted"
-                      )}
+                      onClick={() => setDeleteBlog(blog)}
                     >
-                      {blog.published ? "Published" : "Draft"}
+                      Delete
                     </Button>
                   </div>
                 </CardContent>
               </Card>
-            )
+            );
           })}
         </div>
       ) : (
-        <div className="flex flex-col items-center justify-center py-20 text-center opacity-70">
-          <p className="text-lg font-medium mb-1">No blogs found</p>
-          <p className="text-sm text-muted-foreground mb-4">
-            Try adjusting your filters or create a new blog.
-          </p>
-          <Link href={ROUTES.DASHBOARD.BLOGS.NEW}>
-            <Button size="sm">
-              <Plus className="w-4 h-4 mr-2" /> Create Blog
-            </Button>
-          </Link>
-        </div>
+        <p className="text-muted-foreground text-center py-20">No blogs found.</p>
       )}
 
       {/* Pagination */}
-      {totalPages > 1 && (
-        <div className="flex justify-center items-center gap-3 pt-6 border-t">
-          <Button
-            size="sm"
-            variant="outline"
-            onClick={handlePrev}
-            disabled={currentPage === 1}
-          >
-            Previous
-          </Button>
-          <p className="text-sm">
-            Page <span className="font-semibold">{currentPage}</span> of{" "}
-            <span className="font-semibold">{totalPages}</span>
-          </p>
-          <Button
-            size="sm"
-            variant="outline"
-            onClick={handleNext}
-            disabled={currentPage === totalPages}
-          >
-            Next
-          </Button>
-        </div>
-      )}
+      <DashboardPagination
+        page={page}
+        limit={limit}
+        total={filteredBlogs.length}
+        onPageChange={setPage}
+      />
+
+      {/* Delete Dialog */}
+      <Dialog open={!!deleteBlog} onOpenChange={() => setDeleteBlog(null)}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Delete Blog</DialogTitle>
+            <DialogDescription>
+              Are you sure you want to delete this blog? This action cannot be undone.
+            </DialogDescription>
+          </DialogHeader>
+
+          <DialogFooter className="mt-4 flex justify-end gap-3">
+            <Button variant="outline" onClick={() => setDeleteBlog(null)}>
+              Cancel
+            </Button>
+            <Button
+              variant="destructive"
+              onClick={confirmDelete}
+              disabled={deleting}
+            >
+              {deleting ? "Deleting..." : "Delete"}
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }

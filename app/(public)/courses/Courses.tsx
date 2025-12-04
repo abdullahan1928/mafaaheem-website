@@ -37,7 +37,8 @@ const Courses = ({ initialCourses }: CoursesProps) => {
         const res = await fetch("/api/courses")
         if (!res.ok) throw new Error("Failed to fetch courses")
         const data = await res.json()
-        setCourses(data.data)
+      console.log('Fetched courses:', data)
+        setCourses(data)
       } catch (err: any) {
         setError(err.message || "Error loading courses")
       } finally {

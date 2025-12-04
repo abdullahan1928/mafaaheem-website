@@ -5,7 +5,7 @@ import connectDB from "@/lib/mongodb";
 export async function GET() {
   try {
     await connectDB();
-    const events = await Event.find().sort({ date: 1 });
+    const events = await Event.find().sort({ date: -1 });
     return NextResponse.json(events);
   } catch (error) {
     return NextResponse.json({ message: "Error getting events", error }, { status: 500 });

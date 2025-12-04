@@ -108,10 +108,9 @@ export const QuillEditor: React.FC<QuillEditorProps> = ({
         full && "fixed inset-4 z-50 shadow-xl border-ring/40",
         className
       )}
-      style={{ minHeight }}
     >
       {/* Header */}
-      <div className="flex items-center justify-between border-b bg-muted/60 backdrop-blur px-3 py-2 gap-2">
+      <div className="flex items-center justify-between border-b bg-muted/60 backdrop-blur px-3 py-2 gap-2 ">
         <div className="text-xs font-medium opacity-70">Rich Text Editor</div>
         <div className="flex items-center gap-1">
           {onSave && (
@@ -153,7 +152,7 @@ export const QuillEditor: React.FC<QuillEditorProps> = ({
         <div
           className={cn(
             // "absolute inset-0 flex flex-col transition-opacity duration-200",
-            preview ? "opacity-0 pointer-events-none" : "opacity-100"
+            preview ? "opacity-0 pointer-events-none" : "opacity-100 "
           )}
         >
           <ReactQuill
@@ -165,7 +164,7 @@ export const QuillEditor: React.FC<QuillEditorProps> = ({
             modules={modules}
             formats={formats}
             className={cn(
-              "flex-1",
+              `flex-1 h-[${minHeight}px]`,
               resolvedTheme === "dark" ? "quill-dark" : "quill-light"
             )}
           />

@@ -48,6 +48,7 @@ export default function EventDetailsPage() {
         date: data.date || "",
         language: data.language || "en",
       });
+      console.log(data);
       setLoading(false);
     };
     fetchEvent();
