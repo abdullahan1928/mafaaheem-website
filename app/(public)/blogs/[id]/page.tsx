@@ -106,7 +106,7 @@ export default function BlogDetailPage() {
         className={cn(
           "prose max-w-4xl mx-auto text-justify leading-relaxed prose-headings:text-mafaaheem-brown prose-p:text-muted-foreground prose-a:text-mafaaheem-gold hover:prose-a:text-mafaaheem-brown prose-img:rounded-2xl prose-img:shadow-sm",
           isRTL && "!text-right",
-          blog.language === "ur" && "urdu",
+          blog.language === "ur" && "urdu text-[1.3rem] [word-spacing:0.12em]",
           blog.language === "ar" && "arabic"
         )}
         dangerouslySetInnerHTML={{ __html: blog.content }}
