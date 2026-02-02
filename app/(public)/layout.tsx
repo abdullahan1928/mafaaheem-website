@@ -36,7 +36,7 @@ export async function generateMetadata(): Promise<Metadata> {
           ? "معهد مفاهيم هو مركز للتعليم الإسلامي والفهم، مكرّس لتنمية العقول والقلوب من خلال التعليم الأصيل والنمو الروحي."
           : "Mafaaheem Institute is a center of Islamic learning and understanding, devoted to nurturing minds and hearts through authentic education and spiritual growth.",
     openGraph: {
-      title: `${siteName} Institute`,
+      title: `${siteName}`,
       description:
         lang === "ur"
           ? "علم و فہم کے فروغ اور خدمتِ انسانیت کے لیے وقف ادارہ۔"

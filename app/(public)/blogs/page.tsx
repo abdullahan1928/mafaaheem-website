@@ -10,6 +10,7 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import type { IBlog } from "@/models/Blog";
 import { blogsContent } from "@/data/blogs";
 import { formatDateWithLanguage } from "@/lib/date";
+import { cn } from "@/lib/utils";
 
 export default function BlogsPage() {
   const { language, isRTL } = useLanguage();
@@ -157,7 +158,11 @@ export default function BlogsPage() {
                 />
 
                 <div
-                  className={`prose !text-sm text-muted-foreground leading-relaxed line-clamp-3 mb-4 ${blog.language === "ur" && "urdu"} ${blog.language === "ar" && "arabic"}`}
+                  className={cn(
+                    "prose !text-sm text-muted-foreground leading-relaxed line-clamp-3 mb-4",
+                    blog.language === "ur" && "urdu !text-right !text-base",
+                    blog.language === "ar" && "arabic !text-right",
+                  )}
                   dangerouslySetInnerHTML={{ __html: blog.content }}
                 />
 
